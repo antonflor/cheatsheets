@@ -1,3 +1,4 @@
+
 **show mac address-table**
   - Displays the MAC address table.
 
