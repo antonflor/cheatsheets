@@ -1,3 +1,13 @@
+# BIRD Command Cheat Sheet
+
+This document provides a comprehensive list of commands for managing and troubleshooting BIRD (BIRD Internet Routing Daemon), an open-source routing daemon for Unix-like systems. BIRD is widely used for its flexibility and supports various routing protocols, making it a preferred choice in many network infrastructures.
+
+The commands listed here are tailored for network engineers and system administrators who work with BIRD on Debian-based systems. They cover a range of functionalities from basic status checks to advanced protocol management and routing table manipulation. This cheat sheet serves as a quick reference guide to streamline daily tasks and enhance troubleshooting procedures.
+
+Please note that the effectiveness and output of these commands can vary based on your BIRD configuration and the specific environment in which it's running. Always ensure you have the necessary permissions to execute these commands and use them cautiously, especially in a production environment.
+
+---
+
 **birdc show status**
 - Displays the current status of the BIRD routing daemon.
 
