@@ -1,5 +1,34 @@
+**show interfaces**
+
+- Displays status and statistics for all interfaces.
+
+**show interfaces [interface]**
+- Shows detailed information about a specific interface.
+
+**show interfaces status**
+- Provides a quick overview of all interfaces' status.
 
 **show mac address-table**
+- Displays the MAC address table.
+
+**show mac address-table dynamic**
+- Shows dynamically learned MAC addresses.
+
+**show vlan**
+
+- Displays VLAN information.
+
+**show vlan brief**
+- Provides a brief summary of all VLANs.
+
+**show spanning-tree**
+- Displays Spanning Tree Protocol (STP) information.
+
+**show spanning-tree summary**
+- Shows a summary of STP status.
+
+**show spanning-tree root**
+- Displays the root bridge information for STP.a**show mac address-table**
   - Displays the MAC address table.
 
 **show vlan**
@@ -148,3 +177,153 @@
 
 **test cable-diagnostics tdr interface [INTERFACE_NAME]**
 - Runs a Time Domain Reflectometer (TDR) test on a specified interface.
+
+**show interfaces**
+- Displays status and statistics for all interfaces.
+
+**show interfaces [interface]**
+- Shows detailed information about a specific interface.
+
+**show interfaces status**
+- Provides a quick overview of all interfaces' status.
+
+**show mac address-table**
+- Displays the MAC address table.
+
+**show mac address-table dynamic**
+- Shows dynamically learned MAC addresses.
+
+**show vlan**
+- Displays VLAN information.
+
+**show vlan brief**
+- Provides a brief summary of all VLANs.
+
+**show spanning-tree**
+- Displays Spanning Tree Protocol (STP) information.
+
+**show spanning-tree summary**
+- Shows a summary of STP status.
+
+**show spanning-tree root**
+- Displays the root bridge information for STP.
+
+**show spanning-tree [vlan VLAN_ID]**
+- Shows STP information for a specific VLAN.
+
+**show interfaces trunk**
+- Displays trunk ports and their encapsulation.
+
+**show etherchannel summary**
+- Shows the status of EtherChannel interfaces.
+
+**show port-security**
+- Displays port security settings.
+
+**show port-security interface [interface]**
+- Shows port security details on a specific interface.
+
+**show interfaces switchport**
+- Displays switchport information for interfaces.
+
+**show arp**
+- Displays the ARP table.
+
+**show cdp neighbors**
+- Lists Cisco Discovery Protocol (CDP) neighbor devices.
+
+**show cdp neighbors detail**
+- Provides detailed information about CDP neighbors.
+
+**show lldp neighbors**
+- Lists Link Layer Discovery Protocol (LLDP) neighbor devices.
+
+**show lldp neighbors detail**
+- Provides detailed information about LLDP neighbors.
+
+**test cable-diagnostics tdr interface [interface]**
+- Runs a cable diagnostics test on an interface.
+
+**show interface counters errors**
+- Displays interface error counters.
+
+**show interface [interface] switchport**
+- Shows the switchport configuration for a specific interface.
+
+**show vtp status**
+- Displays VLAN Trunking Protocol (VTP) status.
+
+**show udld [interface]**
+- Shows UniDirectional Link Detection (UDLD) status on an interface.
+
+**clear mac address-table dynamic**
+- Clears the dynamic entries from the MAC address table.
+
+**clear counters [interface]**
+- Clears the counters on a specific interface.
+
+**debug spanning-tree events**
+- Enables debugging for STP events.
+
+**show logging**
+- Displays the system log for potential error messages or alerts.
+
+**show spanning-tree [vlan VLAN_ID]**
+- Shows STP information for a specific VLAN.
+
+**show interfaces trunk**
+- Displays trunk ports and their encapsulation.
+
+**show etherchannel summary**
+- Shows the status of EtherChannel interfaces.
+
+**show port-security**
+- Displays port security settings.
+
+**show port-security interface [interface]**
+- Shows port security details on a specific interface.
+
+**show interfaces switchport**
+- Displays switchport information for interfaces.
+
+**show arp**
+- Displays the ARP table.
+
+**show cdp neighbors**
+- Lists Cisco Discovery Protocol (CDP) neighbor devices.
+
+**show cdp neighbors detail**
+- Provides detailed information about CDP neighbors.
+
+**show lldp neighbors**
+- Lists Link Layer Discovery Protocol (LLDP) neighbor devices.
+
+**show lldp neighbors detail**
+- Provides detailed information about LLDP neighbors.
+
+**test cable-diagnostics tdr interface [interface]**
+- Runs a cable diagnostics test on an interface.
+
+**show interface counters errors**
+- Displays interface error counters.
+
+**show interface [interface] switchport**
+- Shows the switchport configuration for a specific interface.
+
+**show vtp status**
+- Displays VLAN Trunking Protocol (VTP) status.
+
+**show udld [interface]**
+- Shows UniDirectional Link Detection (UDLD) status on an interface.
+
+**clear mac address-table dynamic**
+- Clears the dynamic entries from the MAC address table.
+
+**clear counters [interface]**
+- Clears the counters on a specific interface.
+
+**debug spanning-tree events**
+- Enables debugging for STP events.
+
+**show logging**
+- Displays the system log for potential error messages or alerts.
