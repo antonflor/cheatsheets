@@ -136,6 +136,7 @@
 **show interfaces description**
 - Displays interface descriptions and status.
 
+
 **show interfaces status**
 - Shows the link status of all interfaces.
 
