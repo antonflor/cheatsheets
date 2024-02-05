@@ -1,3 +1,10 @@
+# Debian Command Cheat Sheet
+
+This cheat sheet is a collection of essential commands for systems engineers and administrators working with Debian, one of the most popular Linux distributions. It includes a variety of commands for package management, system information, service management, and system monitoring.
+
+Designed as a quick reference, this document aims to assist in daily system administration tasks, software management, and troubleshooting. The commands listed are fundamental for efficient system management and can be used in both development and production environments. Always ensure to run these commands with the appropriate permissions and be aware of their impact, especially when used on critical systems.
+
+---
 
 1. **sudo apt update**
    - Updates the package index.
