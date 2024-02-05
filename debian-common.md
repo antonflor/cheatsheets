@@ -1,151 +1,151 @@
 
-**sudo apt update**
+1. **sudo apt update**
    - Updates the package index.
 
-**sudo apt upgrade**
+2. **sudo apt upgrade**
    - Upgrades all upgradable packages.
 
-**sudo apt full-upgrade**
+3. **sudo apt full-upgrade**
    - Upgrades packages with auto-handling of dependencies.
 
-**sudo apt install [PACKAGE_NAME]**
+4. **sudo apt install [PACKAGE_NAME]**
    - Installs a package.
 
-**sudo apt remove [PACKAGE_NAME]**
+5. **sudo apt remove [PACKAGE_NAME]**
    - Removes a package without removing dependencies.
 
-**sudo apt purge [PACKAGE_NAME]**
+6. **sudo apt purge [PACKAGE_NAME]**
    - Removes a package along with its configuration files.
 
-**sudo apt autoremove**
+7. **sudo apt autoremove**
    - Automatically removes all unused packages.
 
-**sudo apt-get dist-upgrade**
+8. **sudo apt-get dist-upgrade**
    - Upgrades the distribution to the latest release.
 
-**dpkg -l**
+9. **dpkg -l**
    - Lists all installed packages.
 
-
-**dpkg -i [PACKAGE_FILE.deb]**
+10. **dpkg -i [PACKAGE_FILE.deb]**
     - Installs a .deb package file.
 
-**dpkg -r [PACKAGE_NAME]**
+11. **dpkg -r [PACKAGE_NAME]**
     - Removes a .deb package.
 
-**dpkg -P [PACKAGE_NAME]**
+12. **dpkg -P [PACKAGE_NAME]**
     - Purges a .deb package.
 
-**dpkg -s [PACKAGE_NAME]**
+13. **dpkg -s [PACKAGE_NAME]**
     - Shows package info and status.
 
-**dpkg -L [PACKAGE_NAME]**
+14. **dpkg -L [PACKAGE_NAME]**
     - Lists files installed by a package.
 
-**dpkg -S [FILE_PATH]**
+15. **dpkg -S [FILE_PATH]**
     - Finds the package that installed a file.
 
-**sudo apt-cache search [KEYWORD]**
+16. **sudo apt-cache search [KEYWORD]**
     - Searches the package database for a keyword.
 
-**sudo apt-cache show [PACKAGE_NAME]**
+17. **sudo apt-cache show [PACKAGE_NAME]**
     - Shows package details.
 
-**uname -a**
+18. **uname -a**
     - Displays kernel and system information.
 
-**lsb_release -a**
+19. **lsb_release -a**
     - Shows distribution information.
 
-**hostnamectl**
+20. **hostnamectl**
     - Shows or sets the system hostname.
 
-**systemctl status [SERVICE_NAME]**
+21. **systemctl status [SERVICE_NAME]**
     - Checks the status of a service.
 
-**systemctl start [SERVICE_NAME]**
+22. **systemctl start [SERVICE_NAME]**
     - Starts a service.
 
-**systemctl stop [SERVICE_NAME]**
+23. **systemctl stop [SERVICE_NAME]**
     - Stops a service.
 
-**systemctl restart [SERVICE_NAME]**
+24. **systemctl restart [SERVICE_NAME]**
     - Restarts a service.
 
-**systemctl enable [SERVICE_NAME]**
+25. **systemctl enable [SERVICE_NAME]**
     - Enables a service to start on boot.
 
-**systemctl disable [SERVICE_NAME]**
+26. **systemctl disable [SERVICE_NAME]**
     - Disables a service from starting on boot.
 
-**journalctl -xe**
+27. **journalctl -xe**
     - Views detailed system logs.
 
-**journalctl -fu [SERVICE_NAME]**
+28. **journalctl -fu [SERVICE_NAME]**
     - Follows the logs for a specific service.
 
-**top**
+29. **top**
     - Displays real-time system resource usage.
 
-**htop**
+30. **htop**
     - An interactive process viewer (if installed).
 
-**df -h**
+31. **df -h**
     - Shows disk space usage.
 
-**du -sh [DIRECTORY]**
+32. **du -sh [DIRECTORY]**
     - Shows the size of a directory.
 
-**free -m**
+33. **free -m**
     - Displays memory usage in MB.
 
-**ps aux**
+34. **ps aux**
     - Shows running processes.
 
-**kill [PID]**
+35. **kill [PID]**
     - Kills a process by its PID.
 
-**killall [PROCESS_NAME]**
+36. **killall [PROCESS_NAME]**
     - Kills all processes with the given name.
 
-**crontab -e**
+37. **crontab -e**
     - Edits the current user's cron jobs.
 
-**crontab -l**
+38. **crontab -l**
     - Lists the current user's cron jobs.
 
-**find [DIRECTORY] -name [FILENAME]**
+39. **find [DIRECTORY] -name [FILENAME]**
     - Searches for a file in a directory.
 
-**grep [PATTERN] [FILE]**
+40. **grep [PATTERN] [FILE]**
     - Searches inside a file for a pattern.
 
-**tar -czvf [ARCHIVE.tar.gz] [DIRECTORY]**
+41. **tar -czvf [ARCHIVE.tar.gz] [DIRECTORY]**
     - Creates a gzipped tar archive.
 
-**tar -xzvf [ARCHIVE.tar.gz]**
+42. **tar -xzvf [ARCHIVE.tar.gz]**
     - Extracts a gzipped tar archive.
 
-**chmod [PERMISSIONS] [FILE]**
+43. **chmod [PERMISSIONS] [FILE]**
     - Changes file permissions.
 
-**chown [USER]:[GROUP] [FILE]**
+44. **chown [USER]:[GROUP] [FILE]**
     - Changes file owner and group.
 
-**ssh [USER]@[HOST]**
+45. **ssh [USER]@[HOST]**
     - Connects to a remote host via SSH.
 
-**scp [SOURCE] [USER]@[HOST]:[DESTINATION]**
+46. **scp [SOURCE] [USER]@[HOST]:[DESTINATION]**
     - Copies files over SSH.
 
-**rsync -avz [SOURCE] [USER]@[HOST]:[DESTINATION]**
+47. **rsync -avz [SOURCE] [USER]@[HOST]:[DESTINATION]**
     - Syncs files/directories over SSH.
 
-**wget [URL]**
+48. **wget [URL]**
     - Downloads files from the internet.
 
-**curl -O [URL]**
+49. **curl -O [URL]**
     - Fetches a file from a URL.
 
-**iptables -L**
+50. **iptables -L**
     - Lists all firewall rules.
+
