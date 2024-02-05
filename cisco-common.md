@@ -1,5 +1,12 @@
-**show interfaces**
+# Cisco Command Cheat Sheet
 
+This document is a curated collection of essential Cisco commands for network and systems engineers. It focuses on troubleshooting Layer 2 issues and general network management on Cisco devices. These commands are vital for diagnosing connectivity problems, VLAN configurations, STP issues, and more.
+
+The cheat sheet is designed as a quick reference to facilitate daily network management tasks and to assist in rapidly resolving common network issues. Please use these commands with caution, as they can significantly impact network operations, especially in a production environment.
+
+---
+
+**show interfaces**
 - Displays status and statistics for all interfaces.
 
 **show interfaces [interface]**
@@ -15,7 +22,6 @@
 - Shows dynamically learned MAC addresses.
 
 **show vlan**
-
 - Displays VLAN information.
 
 **show vlan brief**
@@ -28,8 +34,7 @@
 - Shows a summary of STP status.
 
 **show spanning-tree root**
-- Displays the root bridge information for STP.a**show mac address-table**
-  - Displays the MAC address table.
+- Displays the root bridge information for STP.
 
 **show vlan**
   - Shows VLAN configurations and status.
