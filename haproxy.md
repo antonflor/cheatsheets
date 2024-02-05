@@ -1,3 +1,12 @@
+# HAProxy Command Cheat Sheet
+
+This document provides a list of commands for managing and troubleshooting HAProxy, an open-source load balancer and proxy server. The commands cover a wide range of functionalities, including monitoring, configuration verification, and runtime management.
+
+This cheat sheet is intended for system administrators and network engineers who are responsible for maintaining HAProxy instances. It serves as a quick reference to enhance operational efficiency and to address common issues encountered in HAProxy environments. Use these commands with an understanding of their impact on your specific setup.
+
+
+---
+
 **sudo systemctl status haproxy**
 - Checks the current status of the HAProxy service.
 
