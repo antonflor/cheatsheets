@@ -1,3 +1,11 @@
+# iptables Command Cheat Sheet
+
+This document provides a comprehensive list of iptables commands, crucial for network administrators and security professionals. iptables is the default firewall tool on Linux systems, used for network packet filtering and manipulation.
+
+The cheat sheet covers basic to advanced iptables functionalities, including setting up firewalls, NAT, port forwarding, and managing traffic rules. It serves as a handy guide for securing Linux systems and managing network traffic flows. Given the powerful nature of iptables, it is advised to use these commands with caution, as incorrect usage can lead to network outages or security vulnerabilities.
+
+---
+
 1. **List All Rules**
    - `sudo iptables -L`
    - Lists all active rules.
