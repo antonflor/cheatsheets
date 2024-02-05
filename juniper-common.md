@@ -1,3 +1,11 @@
+# Juniper Command Cheat Sheet
+
+This document presents a comprehensive list of Juniper commands, focusing on BGP, MPLS, and general routing management. It is an invaluable resource for network engineers and administrators involved in managing Juniper routers and switches.
+
+The commands provided here are intended to assist in everyday network operations and advanced troubleshooting. They offer insights into protocol configurations, routing tables, and network diagnostics. Use these commands carefully, as they can affect network behavior and service delivery.
+
+
+---
 
 **show bgp summary**
   - Displays a summary of BGP peerings and their status.
