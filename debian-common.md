@@ -26,6 +26,7 @@
 **dpkg -l**
    - Lists all installed packages.
 
+
 **dpkg -i [PACKAGE_FILE.deb]**
     - Installs a .deb package file.
 
