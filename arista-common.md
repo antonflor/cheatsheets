@@ -1,3 +1,11 @@
+# Arista Command Cheat Sheet
+
+This cheat sheet compiles a range of commands specifically for network engineers working with Arista switches. It covers various aspects of network troubleshooting and configuration, including OSPF, Layer 2 issues, and general device management.
+
+Intended as a quick reference guide, this document aims to streamline the process of managing Arista network environments and to assist in efficient problem-solving. Remember to apply these commands judiciously, as they can have a substantial impact on network performance and stability.
+
+---
+
 **show vrrp**
 - Displays VRRP (Virtual Router Redundancy Protocol) configurations and status.
 
