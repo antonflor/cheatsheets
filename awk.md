@@ -1,3 +1,11 @@
+# AWK Command Cheat Sheet
+
+This cheat sheet is a collection of AWK commands useful for text processing and data manipulation. AWK is a powerful programming language and a standard tool on Unix-like systems for processing and analyzing text files.
+
+These commands range from basic to advanced usage, suitable for tasks like pattern matching, field extraction, and data reporting. This guide serves as a handy reference for system administrators, developers, and data analysts working with text files and logs.
+
+---
+
 1. **Print All Lines**
    - `awk '{print}' file.txt`
    - Prints all lines in `file.txt`.
