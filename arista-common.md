@@ -196,4 +196,65 @@
 
 **write memory**
 
+
+**show ip ospf neighbor**
+   - Displays OSPF neighbor relationships and states.
+
+**show ip ospf interface**
+   - Shows OSPF-related information on interfaces.
+
+**show ip ospf database**
+   - Displays the OSPF link-state database (LSDB).
+
+**show ip route ospf**
+   - Shows routes learned via OSPF.
+
+**show ip ospf traffic**
+   - Displays OSPF traffic statistics.
+
+**show spanning-tree**
+   - Shows the state of Spanning Tree Protocol (STP) on the switch.
+
+**show spanning-tree detail**
+   - Provides detailed information about STP instances.
+
+**show interfaces status**
+   - Displays the status of all interfaces.
+
+**show interfaces description**
+   - Shows a description of interfaces and their status.
+
+**show vlan**
+    - Displays VLAN configurations and status.
+
+**show mac address-table**
+    - Shows the MAC address table.
+
+**show etherchannel summary**
+    - Provides a summary of EtherChannel status.
+
+**show interfaces trunk**
+    - Displays trunking information on interfaces.
+
+**show interfaces [INTERFACE_NAME]**
+    - Displays detailed information about a specific interface.
+
+**show logging**
+    - Displays the system log for potential error messages or alerts.
+
+**show ip arp**
+    - Shows the ARP table, useful for resolving IP to MAC address mappings.
+
+**show lldp neighbors**
+    - Displays LLDP neighbor information, useful for verifying network topology.
+
+**show ip ospf border-routers**
+    - Shows OSPF border routers in the network.
+
+**show ip ospf virtual-links**
+    - Displays OSPF virtual link configurations.
+
+**debug ip ospf events**
+    - Enables OSPF event debugging for more granular troubleshooting.
+
 - Saves the current configuration to the startup configuration file.
