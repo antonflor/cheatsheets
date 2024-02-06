@@ -6,94 +6,103 @@ The commands listed here are tailored for network engineers and system administr
 
 Please note that the effectiveness and output of these commands can vary based on your BIRD configuration and the specific environment in which it's running. Always ensure you have the necessary permissions to execute these commands and use them cautiously, especially in a production environment.
 
----
 
-**birdc show status**
-- Displays the current status of the BIRD routing daemon.
+## BIRD Status and Protocol Management
 
-**birdc show protocols**
-- Lists all routing protocols configured in BIRD.
+- **birdc show status**
+  - Displays the current status of the BIRD routing daemon.
 
-**birdc show protocol [PROTOCOL_NAME]**
-- Shows detailed information about a specific routing protocol.
+- **birdc show protocols**
+  - Lists all routing protocols configured in BIRD.
 
-**birdc show route**
-- Displays the routing table managed by BIRD.
+- **birdc show protocol [PROTOCOL_NAME]**
+  - Shows detailed information about a specific routing protocol.
 
-**birdc show route protocol [PROTOCOL_NAME]**
-- Shows routes learned from a specific routing protocol.
+- **birdc configure**
+  - Reloads the configuration file.
 
-**birdc show route all**
-- Displays all routes in the routing table, including inactive ones.
+- **birdc configure check**
+  - Checks the configuration file for errors without applying changes.
 
-**birdc show route export [PROTOCOL_NAME]**
-- Shows routes exported by a specific protocol.
+- **birdc disable [PROTOCOL_NAME]**
+  - Temporarily disables a routing protocol.
 
-**birdc show route where [CONDITION]**
-- Displays routes matching a specific condition.
+- **birdc enable [PROTOCOL_NAME]**
+  - Enables a previously disabled routing protocol.
 
-**birdc show route for [IP_ADDRESS]**
-- Shows the route for a specific IP address.
+- **birdc restart [PROTOCOL_NAME]**
+  - Restarts a specific routing protocol.
 
-**birdc show ospf neighbors**
-- Lists OSPF neighbors.
+- **birdc log [MESSAGE]**
+  - Sends a custom log message to the BIRD log.
 
-**birdc show ospf state**
-- Displays the OSPF internal state.
+- **birdc show events**
+  - Displays recent routing events.
 
-**birdc show ospf interfaces**
-- Shows OSPF interfaces and their states.
+- **birdc show symbols**
+  - Lists all symbols (like route filters and functions) defined in the configuration.
 
-**birdc show ospf lsadb**
-- Displays the OSPF link-state database.
+- **birdc debug [PROTOCOL_NAME] [DEBUG_OPTIONS]**
+  - Enables debugging for a specific protocol.
 
-**birdc show bfd sessions**
-- Lists BFD (Bidirectional Forwarding Detection) sessions.
+## Route Display and Analysis
 
-**birdc show memory**
-- Shows memory usage by the BIRD daemon.
+- **birdc show route**
+  - Displays the routing table managed by BIRD.
 
-**birdc configure**
-- Reloads the configuration file.
+- **birdc show route protocol [PROTOCOL_NAME]**
+  - Shows routes learned from a specific routing protocol.
 
-**birdc configure check**
-- Checks the configuration file for errors without applying changes.
+- **birdc show route all**
+  - Displays all routes in the routing table, including inactive ones.
 
-**birdc disable [PROTOCOL_NAME]**
-- Temporarily disables a routing protocol.
+- **birdc show route export [PROTOCOL_NAME]**
+  - Shows routes exported by a specific protocol.
 
-**birdc enable [PROTOCOL_NAME]**
-- Enables a previously disabled routing protocol.
+- **birdc show route where [CONDITION]**
+  - Displays routes matching a specific condition.
 
-**birdc restart [PROTOCOL_NAME]**
-- Restarts a specific routing protocol.
+- **birdc show route for [IP_ADDRESS]**
+  - Shows the route for a specific IP address.
 
-**birdc log [MESSAGE]**
-- Sends a custom log message to the BIRD log.
+## OSPF and BFD Sessions
 
-**birdc show events**
-- Displays recent routing events.
+- **birdc show ospf neighbors**
+  - Lists OSPF neighbors.
 
-**birdc show symbols**
-- Lists all symbols (like route filters and functions) defined in the configuration.
+- **birdc show ospf state**
+  - Displays the OSPF internal state.
 
-**birdc debug [PROTOCOL_NAME] [DEBUG_OPTIONS]**
-- Enables debugging for a specific protocol.
+- **birdc show ospf interfaces**
+  - Shows OSPF interfaces and their states.
 
-**birdc show filters**
-- Displays the configured route filters.
+- **birdc show ospf lsadb**
+  - Displays the OSPF link-state database.
 
-**birdc show interfaces**
-- Lists network interfaces known to BIRD.
+- **birdc show bfd sessions**
+  - Lists BFD (Bidirectional Forwarding Detection) sessions.
 
-**birdc show sockets**
-- Shows active network sockets used by BIRD.
+## Memory Usage and Interface Information
 
-**birdc show tables**
-- Lists routing tables managed by BIRD.
+- **birdc show memory**
+  - Shows memory usage by the BIRD daemon.
 
-**birdc show static routes**
-- Displays static routes configured in BIRD.
+- **birdc show interfaces**
+  - Lists network interfaces known to BIRD.
 
-**birdc show rip neighbors**
-- Lists RIP neighbors and their status.
+- **birdc show sockets**
+  - Shows active network sockets used by BIRD.
+
+## Routing Tables and Filters
+
+- **birdc show tables**
+  - Lists routing tables managed by BIRD.
+
+- **birdc show static routes**
+  - Displays static routes configured in BIRD.
+
+- **birdc show filters**
+  - Displays the configured route filters.
+
+- **birdc show rip neighbors**
+  - Lists RIP neighbors and their status.
