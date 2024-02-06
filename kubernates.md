@@ -26,7 +26,7 @@ The commands are categorized into sections for easy reference, covering everythi
 - **kubectl describe pod [pod_name]**
   - Shows detailed information about a pod.
 
-## Advanced Resource Management
+## Resource Management
 - **kubectl create -f [file.yaml]**
   - Creates a resource from a YAML file.
 
