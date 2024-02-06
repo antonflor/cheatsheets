@@ -64,7 +64,7 @@ Pacemaker Commands
 - **pcs constraint remove [constraint_id]**
   - Removes a constraint.
 
-## Advanced Cluster Configuration
+## Cluster Configuration
 
 - **pcs property list**
   - Lists all cluster properties.
