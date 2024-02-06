@@ -1,6 +1,6 @@
-# Tech Cheatsheets Repository
+# Cheatsheets Repository
 
-Welcome to the Tech Cheatsheets Repository – your one-stop hub for quick-reference guides in the world of networking and technology. This repository is dedicated to providing concise, easy-to-understand cheat sheets for a range of technologies including Cisco, Juniper, Arista, and more.
+Welcome to the Cheatsheets Repository – your one-stop hub for quick-reference guides in the world of networking and technology. This repository is dedicated to providing concise, easy-to-understand cheat sheets for a range of technologies including Cisco, Juniper, Arista, and more.
 
 ---
 
