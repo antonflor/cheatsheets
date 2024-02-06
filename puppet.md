@@ -54,7 +54,7 @@ The commands listed here cover everything from basic operations and system check
 - **puppet node purge [node-name]**
   - Completely removes a node from PuppetDB and cleans up exported resources.
 
-## Advanced Puppet Tasks
+## Misc Puppet Tasks
 
 - **puppet db export [file.tar.gz]**
   - Exports PuppetDB data to a file.
