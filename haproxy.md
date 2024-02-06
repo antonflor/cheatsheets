@@ -56,7 +56,7 @@ This cheat sheet is intended for system administrators and network engineers who
 - **echo "shutdown session [session_id]" | sudo socat stdio /var/run/haproxy.sock**
   - Forcefully terminates a session.
 
-## Advanced Management and Debugging
+## Management and Debugging
 
 - **echo "clear counters" | sudo socat stdio /var/run/haproxy.sock**
   - Clears all counters in the proxy (does not reset current sessions).
