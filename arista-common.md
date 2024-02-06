@@ -4,275 +4,187 @@ This cheat sheet compiles a range of commands specifically for network engineers
 
 Intended as a quick reference guide, this document aims to streamline the process of managing Arista network environments and to assist in efficient problem-solving. Remember to apply these commands judiciously, as they can have a substantial impact on network performance and stability.
 
----
 
-**show vrrp**
-- Displays VRRP (Virtual Router Redundancy Protocol) configurations and status.
+## BGP (Border Gateway Protocol) Management
 
-**show ip bgp**
-- Shows the BGP (Border Gateway Protocol) routing table.
+- **show ip bgp**
+  - Shows the BGP routing table.
 
-**show ip bgp summary**
-- Provides a summary of BGP neighbor relationships.
+- **show ip bgp summary**
+  - Provides a summary of BGP neighbor relationships.
 
-**show ip bgp neighbors**
-- Displays detailed information about BGP neighbors.
+- **show ip bgp neighbors**
+  - Displays detailed information about BGP neighbors.
 
-**show ip route vrf [VRF_NAME]**
-- Shows the IP routing table for a specific VRF (Virtual Routing and Forwarding).
+- **router bgp [AS_NUMBER]**
+  - Configures BGP with a specific Autonomous System (AS) number.
 
-**show running-config vrrp**
-- Displays the running configuration specific to VRRP.
+- **neighbor [IP_ADDRESS] remote-as [AS_NUMBER]**
+  - Configures a BGP neighbor.
 
-**show interfaces Vlan [VLAN_ID]**
-- Shows configuration and status of a specific VLAN interface.
+- **network [IP_ADDRESS] mask [NETMASK]**
+  - Advertises a network in BGP.
 
-**configure terminal**
-- Enters global configuration mode.
+- **show ip bgp neighbors [IP_ADDRESS] advertised-routes**
+  - Displays the routes advertised to a specific BGP neighbor.
 
-**router bgp [AS_NUMBER]**
-- Configures BGP with a specific Autonomous System (AS) number.
+- **show ip bgp neighbors [IP_ADDRESS] received-routes**
+  - Shows routes received from a specific BGP neighbor.
 
-**neighbor [IP_ADDRESS] remote-as [AS_NUMBER]**
-- Configures a BGP neighbor.
+- **show ip bgp regexp [REGEXP]**
+  - Displays routes matching a specific regular expression in BGP.
 
-**network [IP_ADDRESS] mask [NETMASK]**
-- Advertises a network in BGP.
+- **clear ip bgp [IP_ADDRESS]**
+  - Clears a specific BGP session.
 
-**show ip bgp neighbors [IP_ADDRESS] advertised-routes**
-- Displays the routes advertised to a specific BGP neighbor.
+- **show ip bgp community [COMMUNITY]**
+  - Displays routes with a specific BGP community tag.
 
-**show ip bgp neighbors [IP_ADDRESS] received-routes**
-- Shows routes received from a specific BGP neighbor.
+- **show ip bgp dampening parameters**
+  - Displays the BGP route dampening parameters.
 
-**vrrp [GROUP_ID] ip [IP_ADDRESS]**
-- Configures a VRRP group with an IP address.
+- **show ip bgp filter-list [LIST_NUMBER]**
+  - Shows routes that match a specific BGP filter list.
 
-**vrrp [GROUP_ID] priority [PRIORITY_LEVEL]**
-- Sets the priority for a VRRP group.
+- **show ip bgp flap-statistics**
+  - Displays BGP flap statistics.
 
-**vrrp [GROUP_ID] preempt**
-- Enables preemption in a VRRP group.
+- **show ip bgp paths**
+  - Shows path information for BGP routes.
 
-**show ip bgp regexp [REGEXP]**
-- Displays routes matching a specific regular expression in BGP.
+- **show ip bgp policy**
+  - Displays the BGP policy information.
 
-**clear ip bgp [IP_ADDRESS]**
-- Clears a specific BGP session.
+- **show ip bgp route-map [MAP_NAME]**
+  - Shows routes that match a specific route-map in BGP.
 
-**show ip bgp community [COMMUNITY]**
-- Displays routes with a specific BGP community tag.
+- **show ip bgp summary longer-prefixes**
+  - Displays a summary of BGP with longer prefixes.
 
-**redistribute connected**
-- Redistributes connected routes into BGP.
+- **show ip bgp update-group**
+  - Shows BGP update group information.
 
-**redistribute static**
-- Redistributes static routes into BGP.
+- **show running-config bgp**
+  - Displays the current BGP configuration.
 
-**maximum-paths [NUMBER]**
-- Configures BGP to use multiple paths for load sharing.
+## VRRP (Virtual Router Redundancy Protocol)
 
-**soft-reconfiguration inbound**
-- Enables soft reconfiguration for inbound BGP updates.
+- **show vrrp**
+  - Displays VRRP configurations and status.
 
-**show ip bgp dampening parameters**
-- Displays the BGP route dampening parameters.
+- **show running-config vrrp**
+  - Displays the running configuration specific to VRRP.
 
-**show ip bgp filter-list [LIST_NUMBER]**
-- Shows routes that match a specific BGP filter list.
+- **vrrp [GROUP_ID] ip [IP_ADDRESS]**
+  - Configures a VRRP group with an IP address.
 
-**show ip bgp flap-statistics**
-- Displays BGP flap statistics.
+- **vrrp [GROUP_ID] priority [PRIORITY_LEVEL]**
+  - Sets the priority for a VRRP group.
 
-**show ip bgp paths**
-- Shows path information for BGP routes.
+- **vrrp [GROUP_ID] preempt**
+  - Enables preemption in a VRRP group.
 
-**show ip bgp policy**
-- Displays the BGP policy information.
+- **show vrrp brief**
+  - Provides a brief overview of VRRP status.
 
-**show ip bgp route-map [MAP_NAME]**
-- Shows routes that match a specific route-map in BGP.
+- **show vrrp detail**
+  - Displays detailed VRRP information.
 
-**show ip bgp summary longer-prefixes**
-- Displays a summary of BGP with longer prefixes.
+## VLAN and Interface Configuration
 
-**show ip bgp update-group**
-- Shows BGP update group information.
+- **show interfaces Vlan [VLAN_ID]**
+  - Shows configuration and status of a specific VLAN interface.
 
-**show logging**
-- Displays the system log files.
+- **vlan [VLAN_ID]**
+  - Creates a VLAN or enters VLAN configuration mode.
 
-**show mlag detail**
-- Provides detailed information on MLAG status.
+- **interface Vlan [VLAN_ID]**
+  - Enters configuration mode for a specific VLAN interface.
 
-**show running-config bgp**
-- Displays the current BGP configuration.
+- **show vlan**
+  - Displays VLAN information and status.
 
-**show vrf**
-- Displays VRF configurations and status.
+- **show interfaces trunk**
+  - Shows trunk interface status and configurations.
 
-**show vrrp brief**
-- Provides a brief overview of VRRP status.
+- **spanning-tree vlan [VLAN_ID] priority [PRIORITY]**
+  - Sets the spanning-tree priority for a VLAN.
 
-**show vrrp detail**
-- Displays detailed VRRP information.
+- **show spanning-tree detail**
+  - Displays detailed spanning-tree information.
 
-**spanning-tree vlan [VLAN_ID] priority [PRIORITY]**
-- Sets the spanning-tree priority for a VLAN.
+## OSPF (Open Shortest Path First)
 
-**show spanning-tree detail**
-- Displays detailed spanning-tree information.
+- **show ip ospf neighbor**
+  - Displays OSPF neighbor relationships and states.
 
-**show interfaces trunk**
-- Shows trunk interface status and configurations.
+- **show ip ospf interface**
+  - Shows OSPF-related information on interfaces.
 
-**show vlan**
-- Displays VLAN information and status.
+- **show ip ospf database**
+  - Displays the OSPF link-state database (LSDB).
 
-**vlan [VLAN_ID]**
-- Creates a VLAN or enters VLAN configuration mode.
+- **show ip route ospf**
+  - Shows routes learned via OSPF.
 
-**interface Vlan [VLAN_ID]**
-- Enters configuration mode for a specific VLAN interface.
+- **show ip ospf traffic**
+  - Displays OSPF traffic statistics.
 
-**ip route [DESTINATION] [MASK] [NEXT_HOP_IP]**
-- Configures a static route.
+- **show ip ospf border-routers**
+  - Shows OSPF border routers in the network.
 
-**show ip interface brief**
-- Summarizes the status and configuration of all IP interfaces.
+- **show ip ospf virtual-links**
+  - Displays OSPF virtual link configurations.
 
-**show interfaces description**
-- Displays interface descriptions and status.
+- **debug ip ospf events**
+  - Enables OSPF event debugging for more granular troubleshooting.
 
+## General Network Management
 
-**show interfaces status**
-- Shows the link status of all interfaces.
+- **configure terminal**
+  - Enters global configuration mode.
 
-**show interfaces counters errors**
-- Displays interface error counters.
+- **show ip route vrf [VRF_NAME]**
+  - Shows the IP routing table for a specific VRF.
 
-**show interfaces counters rate**
-- Shows the rate of traffic on interfaces.
+- **show vrf**
+  - Displays VRF configurations and status.
 
-**write memory**
-- Saves the current configuration to the startup configuration file.
+- **ip route [DESTINATION] [MASK] [NEXT_HOP_IP]**
+  - Configures a static route.
 
-**show ip ospf neighbor**
-- Displays OSPF neighbor relationships and states.
+- **show ip interface brief**
+  - Summarizes the status and configuration of all IP interfaces.
 
-**show ip ospf interface**
-- Shows OSPF-related information on interfaces.
+- **show interfaces description**
+  - Displays interface descriptions and status.
 
-**show ip ospf database**
-- Displays the OSPF link-state database (LSDB).
+- **show interfaces status**
+  - Shows the link status of all interfaces.
 
-**show ip route ospf**
-- Shows routes learned via OSPF.
+- **show interfaces counters errors**
+  - Displays interface error counters.
 
-**show ip ospf traffic**
-- Displays OSPF traffic statistics.
+- **show interfaces counters rate**
+  - Shows the rate of traffic on interfaces.
 
-**show spanning-tree**
-- Shows the state of Spanning Tree Protocol (STP) on the switch.
+- **write memory**
+  - Saves the current configuration to the startup configuration file.
 
-**show spanning-tree detail**
-- Provides detailed information about STP instances.
+- **show logging**
+  - Displays the system log for potential error messages or alerts.
 
-**show interfaces status**
-- Displays the status of all interfaces.
+- **show mlag detail**
+  - Provides detailed information on MLAG status.
 
-**show interfaces description**
-- Shows a description of interfaces and their status.
+- **show mac address-table**
+  - Shows the MAC address table.
 
-**show vlan**
-- Displays VLAN configurations and status.
+- **show etherchannel summary**
+  - Provides a summary of EtherChannel status.
 
-**show mac address-table**
-- Shows the MAC address table.
+- **show ip arp**
+  - Shows the ARP table, useful for resolving IP to MAC address mappings.
 
-**show etherchannel summary**
-- Provides a summary of EtherChannel status.
-
-**show interfaces trunk**
-- Displays trunking information on interfaces.
-
-**show interfaces [INTERFACE_NAME]**
-- Displays detailed information about a specific interface.
-
-**show logging**
-- Displays the system log for potential error messages or alerts.
-
-**show ip arp**
-- Shows the ARP table, useful for resolving IP to MAC address mappings.
-
-**show lldp neighbors**
-- Displays LLDP neighbor information, useful for verifying network topology.
-
-**show ip ospf border-routers**
-- Shows OSPF border routers in the network.
-
-**show ip ospf virtual-links**
-- Displays OSPF virtual link configurations.
-
-**debug ip ospf events**
-- Enables OSPF event debugging for more granular troubleshooting.
-
-**show ip bgp summary**
-- Displays a summary of BGP peerings and their status.
-
-**show ip bgp neighbors**
-- Shows detailed information about BGP neighbors.
-
-**show ip bgp**
-- Displays the BGP routing table.
-
-**show ip bgp neighbors [NEIGHBOR_IP] received-routes**
-- Shows routes received from a specific BGP neighbor.
-
-**show ip bgp neighbors [NEIGHBOR_IP] advertised-routes**
-- Displays the routes advertised to a specific BGP neighbor.
-
-**show ip route**
-- Shows the IP routing table.
-
-**show ip route summary**
-- Provides a summary of the IP routing table.
-
-**show ip bgp regexp [REGEXP]**
-- Displays routes matching a specific regular expression in BGP.
-
-**show ip bgp community [COMMUNITY]**
-- Shows routes with a specific BGP community tag.
-
-**clear ip bgp [NEIGHBOR_IP]**
-- Clears a specific BGP session.
-
-**show ip bgp dampening parameters**
-- Displays the BGP route dampening parameters.
-
-**show ip bgp paths**
-- Shows path information for BGP routes.
-
-**show ip bgp neighbors [NEIGHBOR_IP] routes**
-- Displays the routes learned from a specific BGP neighbor.
-
-**show ip bgp flap-statistics**
-- Displays BGP flap statistics.
-
-**show ip bgp neighbors [NEIGHBOR_IP] advertised-routes detail**
-- Shows detailed information about routes advertised to a specific neighbor.
-
-**show ip bgp neighbors [NEIGHBOR_IP] received-routes detail**
-- Displays detailed information about routes received from a specific neighbor.
-
-**show ip bgp inconsistent-as**
-- Shows BGP paths with inconsistent origin AS numbers.
-
-**show ip bgp summary | no-more**
-- Displays the BGP summary without pagination.
-
-**show ip bgp filter-list [FILTER_LIST]**
-- Shows routes that match a specific BGP filter list.
-
-**debug ip bgp updates**
-- Enables debugging for BGP updates.
+- **show lldp neighbors**
+  - Displays LLDP neighbor information, useful for verifying network topology.
