@@ -4,155 +4,168 @@ This cheat sheet is a collection of essential commands for systems engineers and
 
 Designed as a quick reference, this document aims to assist in daily system administration tasks, software management, and troubleshooting. The commands listed are fundamental for efficient system management and can be used in both development and production environments. Always ensure to run these commands with the appropriate permissions and be aware of their impact, especially when used on critical systems.
 
----
+## Package Management
 
-1. **sudo apt update**
-   - Updates the package index.
+- **sudo apt update**
+  - Updates the package index.
 
-2. **sudo apt upgrade**
-   - Upgrades all upgradable packages.
+- **sudo apt upgrade**
+  - Upgrades all upgradable packages.
 
-3. **sudo apt full-upgrade**
-   - Upgrades packages with auto-handling of dependencies.
+- **sudo apt full-upgrade**
+  - Upgrades packages with auto-handling of dependencies.
 
-4. **sudo apt install [PACKAGE_NAME]**
-   - Installs a package.
+- **sudo apt install [PACKAGE_NAME]**
+  - Installs a package.
 
-5. **sudo apt remove [PACKAGE_NAME]**
-   - Removes a package without removing dependencies.
+- **sudo apt remove [PACKAGE_NAME]**
+  - Removes a package without removing dependencies.
 
-6. **sudo apt purge [PACKAGE_NAME]**
-   - Removes a package along with its configuration files.
+- **sudo apt purge [PACKAGE_NAME]**
+  - Removes a package along with its configuration files.
 
-7. **sudo apt autoremove**
-   - Automatically removes all unused packages.
+- **sudo apt autoremove**
+  - Automatically removes all unused packages.
 
-8. **sudo apt-get dist-upgrade**
-   - Upgrades the distribution to the latest release.
+- **sudo apt-get dist-upgrade**
+  - Upgrades the distribution to the latest release.
 
-9. **dpkg -l**
-   - Lists all installed packages.
+- **sudo apt-cache search [KEYWORD]**
+  - Searches the package database for a keyword.
 
-10. **dpkg -i [PACKAGE_FILE.deb]**
-    - Installs a .deb package file.
+- **sudo apt-cache show [PACKAGE_NAME]**
+  - Shows package details.
 
-11. **dpkg -r [PACKAGE_NAME]**
-    - Removes a .deb package.
+## dpkg (Debian Package Management)
 
-12. **dpkg -P [PACKAGE_NAME]**
-    - Purges a .deb package.
+- **dpkg -l**
+  - Lists all installed packages.
 
-13. **dpkg -s [PACKAGE_NAME]**
-    - Shows package info and status.
+- **dpkg -i [PACKAGE_FILE.deb]**
+  - Installs a .deb package file.
 
-14. **dpkg -L [PACKAGE_NAME]**
-    - Lists files installed by a package.
+- **dpkg -r [PACKAGE_NAME]**
+  - Removes a .deb package.
 
-15. **dpkg -S [FILE_PATH]**
-    - Finds the package that installed a file.
+- **dpkg -P [PACKAGE_NAME]**
+  - Purges a .deb package.
 
-16. **sudo apt-cache search [KEYWORD]**
-    - Searches the package database for a keyword.
+- **dpkg -s [PACKAGE_NAME]**
+  - Shows package info and status.
 
-17. **sudo apt-cache show [PACKAGE_NAME]**
-    - Shows package details.
+- **dpkg -L [PACKAGE_NAME]**
+  - Lists files installed by a package.
 
-18. **uname -a**
-    - Displays kernel and system information.
+- **dpkg -S [FILE_PATH]**
+  - Finds the package that installed a file.
 
-19. **lsb_release -a**
-    - Shows distribution information.
+## System Information and Management
 
-20. **hostnamectl**
-    - Shows or sets the system hostname.
+- **uname -a**
+  - Displays kernel and system information.
 
-21. **systemctl status [SERVICE_NAME]**
-    - Checks the status of a service.
+- **lsb_release -a**
+  - Shows distribution information.
 
-22. **systemctl start [SERVICE_NAME]**
-    - Starts a service.
+- **hostnamectl**
+  - Shows or sets the system hostname.
 
-23. **systemctl stop [SERVICE_NAME]**
-    - Stops a service.
+## Service Management
 
-24. **systemctl restart [SERVICE_NAME]**
-    - Restarts a service.
+- **systemctl status [SERVICE_NAME]**
+  - Checks the status of a service.
 
-25. **systemctl enable [SERVICE_NAME]**
-    - Enables a service to start on boot.
+- **systemctl start [SERVICE_NAME]**
+  - Starts a service.
 
-26. **systemctl disable [SERVICE_NAME]**
-    - Disables a service from starting on boot.
+- **systemctl stop [SERVICE_NAME]**
+  - Stops a service.
 
-27. **journalctl -xe**
-    - Views detailed system logs.
+- **systemctl restart [SERVICE_NAME]**
+  - Restarts a service.
 
-28. **journalctl -fu [SERVICE_NAME]**
-    - Follows the logs for a specific service.
+- **systemctl enable [SERVICE_NAME]**
+  - Enables a service to start on boot.
 
-29. **top**
-    - Displays real-time system resource usage.
+- **systemctl disable [SERVICE_NAME]**
+  - Disables a service from starting on boot.
 
-30. **htop**
-    - An interactive process viewer (if installed).
+## System Monitoring and Logs
 
-31. **df -h**
-    - Shows disk space usage.
+- **journalctl -xe**
+  - Views detailed system logs.
 
-32. **du -sh [DIRECTORY]**
-    - Shows the size of a directory.
+- **journalctl -fu [SERVICE_NAME]**
+  - Follows the logs for a specific service.
 
-33. **free -m**
-    - Displays memory usage in MB.
+- **top**
+  - Displays real-time system resource usage.
 
-34. **ps aux**
-    - Shows running processes.
+- **htop**
+  - An interactive process viewer (if installed).
 
-35. **kill [PID]**
-    - Kills a process by its PID.
+- **df -h**
+  - Shows disk space usage.
 
-36. **killall [PROCESS_NAME]**
-    - Kills all processes with the given name.
+- **du -sh [DIRECTORY]**
+  - Shows the size of a directory.
 
-37. **crontab -e**
-    - Edits the current user's cron jobs.
+- **free -m**
+  - Displays memory usage in MB.
 
-38. **crontab -l**
-    - Lists the current user's cron jobs.
+- **ps aux**
+  - Shows running processes.
 
-39. **find [DIRECTORY] -name [FILENAME]**
-    - Searches for a file in a directory.
+## Process and Job Management
 
-40. **grep [PATTERN] [FILE]**
-    - Searches inside a file for a pattern.
+- **kill [PID]**
+  - Kills a process by its PID.
 
-41. **tar -czvf [ARCHIVE.tar.gz] [DIRECTORY]**
-    - Creates a gzipped tar archive.
+- **killall [PROCESS_NAME]**
+  - Kills all processes with the given name.
 
-42. **tar -xzvf [ARCHIVE.tar.gz]**
-    - Extracts a gzipped tar archive.
+- **crontab -e**
+  - Edits the current user's cron jobs.
 
-43. **chmod [PERMISSIONS] [FILE]**
-    - Changes file permissions.
+- **crontab -l**
+  - Lists the current user's cron jobs.
 
-44. **chown [USER]:[GROUP] [FILE]**
-    - Changes file owner and group.
+## File and Directory Operations
 
-45. **ssh [USER]@[HOST]**
-    - Connects to a remote host via SSH.
+- **find [DIRECTORY] -name [FILENAME]**
+  - Searches for a file in a directory.
 
-46. **scp [SOURCE] [USER]@[HOST]:[DESTINATION]**
-    - Copies files over SSH.
+- **grep [PATTERN] [FILE]**
+  - Searches inside a file for a pattern.
 
-47. **rsync -avz [SOURCE] [USER]@[HOST]:[DESTINATION]**
-    - Syncs files/directories over SSH.
+- **tar -czvf [ARCHIVE.tar.gz] [DIRECTORY]**
+  - Creates a gzipped tar archive.
 
-48. **wget [URL]**
-    - Downloads files from the internet.
+- **tar -xzvf [ARCHIVE.tar.gz]**
+  - Extracts a gzipped tar archive.
 
-49. **curl -O [URL]**
-    - Fetches a file from a URL.
+- **chmod [PERMISSIONS] [FILE]**
+  - Changes file permissions.
 
-50. **iptables -L**
-    - Lists all firewall rules.
+- **chown [USER]:[GROUP] [FILE]**
+  - Changes file owner and group.
 
+## Networking and Remote Access
+
+- **ssh [USER]@[HOST]**
+  - Connects to a remote host via SSH.
+
+- **scp [SOURCE] [USER]@[HOST]:[DESTINATION]**
+  - Copies files over SSH.
+
+- **rsync -avz [SOURCE] [USER]@[HOST]:[DESTINATION]**
+  - Syncs files/directories over SSH.
+
+- **wget [URL]**
+  - Downloads files from the internet.
+
+- **curl -O [URL]**
+  - Fetches a file from a URL.
+
+- **iptables -L**
+  - Lists all firewall rules.
