@@ -4,8 +4,6 @@ This document is a handy reference for system administrators and DevOps engineer
 
 The commands listed here cover everything from basic operations and system checks to more complex tasks like module management and environment configuration. This cheat sheet is designed to help you efficiently manage your infrastructure with Puppet.
 
----
-
 ## System Checks and Operations
 
 - **puppet agent --test**
