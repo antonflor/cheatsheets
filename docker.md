@@ -5,7 +5,7 @@ This cheat sheet is intended for developers, DevOps engineers, and system admini
 The commands listed here provide a comprehensive guide for managing Docker containers, images, volumes, networks, and more. This guide aims to streamline Docker operations and offer quick access to common commands necessary for effective container management and deployment.
 Docker Commands
 
-## Basic Container Management
+## Container Management
 
 - **docker run [options] [image] [command]**
   - Runs a command in a new container.
