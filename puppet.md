@@ -6,7 +6,7 @@ The commands listed here cover everything from basic operations and system check
 
 ---
 
-## Basic System Checks and Operations
+## System Checks and Operations
 
 - **puppet agent --test**
   - Runs a Puppet agent manually and applies the latest configuration.
