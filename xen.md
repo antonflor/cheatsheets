@@ -5,7 +5,7 @@ This cheat sheet is designed for system administrators and IT professionals mana
 Below is a collection of essential commands that cover daily operations, virtual machine management, networking, and storage in a Xen environment. This guide aims to provide quick and easy access to common Xen commands, facilitating effective management of Xen hosts and guests.
 Citrix Xen Commands
 
-## Basic Host and System Management
+## Host and System Management
 
 - **xe host-list**
   - Lists all hosts in a pool.
