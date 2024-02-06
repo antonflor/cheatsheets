@@ -5,7 +5,7 @@ This cheat sheet is designed for DevOps engineers, cloud architects, and anyone 
 The commands listed here range from basic setup and initialization to more advanced infrastructure management. This guide serves as a quick reference to essential Terraform commands, facilitating efficient infrastructure deployment and management.
 Terraform Commands
 
-## Basic Setup and Initialization
+## Setup and Initialization
 
 - **terraform init**
   - Initializes a new or existing Terraform configuration.
@@ -49,7 +49,7 @@ Terraform Commands
 - **terraform workspace select [name]**
   - Selects an existing workspace.
 
-## Advanced Commands
+## Misc Commands
 
 - **terraform import [resource.address] [id]**
   - Imports existing infrastructure into Terraform.
