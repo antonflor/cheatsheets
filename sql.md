@@ -153,3 +153,133 @@ CREATE INDEX index_name ON table_name (column1, column2);
 ```
 DROP INDEX index_name ON table_name;
 ```
+
+---
+
+### Common SQL Command Examples
+
+#### Creating a Database
+
+```
+CREATE DATABASE example_db;
+```
+
+#### Deleting a Database
+
+```
+DROP DATABASE example_db;
+```
+
+#### Creating a Table
+
+```CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    age INT
+);
+```
+
+#### Deleting a Table
+
+```
+DROP TABLE users;
+```
+
+#### Adding a Column to a Table
+
+```
+ALTER TABLE users ADD COLUMN created_at TIMESTAMP;
+```
+
+#### Deleting a Column from a Table
+
+```
+ALTER TABLE users DROP COLUMN created_at;
+```
+
+#### Renaming a Column
+
+```
+ALTER TABLE users RENAME COLUMN email TO user_email;
+```
+
+#### Inserting Data into a Table
+
+```
+INSERT INTO users (name, email, age) VALUES ('John Doe', 'john@example.com', 28);
+```
+
+#### Updating Data in a Table
+
+```
+UPDATE users SET name = 'Jane Doe' WHERE id = 1;
+```
+
+#### Deleting Data from a Table
+
+```
+DELETE FROM users WHERE id = 1;
+```
+
+#### Selecting All Data from a Table
+
+```
+SELECT * FROM users;
+```
+
+#### Selecting Specific Columns
+
+```
+SELECT name, email FROM users;
+```
+
+#### Filtering Data with a WHERE Clause
+
+```
+SELECT * FROM users WHERE age > 25;
+```
+
+#### Sorting Data with ORDER BY
+
+```
+SELECT * FROM users ORDER BY age DESC;
+```
+
+#### Counting Rows
+
+```
+SELECT COUNT(*) FROM users;
+```
+
+#### Grouping Data with GROUP BY
+
+```
+SELECT age, COUNT(*) FROM users GROUP BY age;
+```
+
+#### Using Aggregate Functions (e.g., SUM, AVG)
+
+```
+SELECT AVG(age) FROM users;
+```
+
+#### Joining Tables (INNER JOIN)
+
+```SELECT users.name, orders.amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;
+```
+
+#### Left Join
+
+```SELECT users.name, orders.amount
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+```
+
+#### Using Subqueries
+
+```
+SELECT name FROM users WHERE id IN (SELECT user_id FROM orders WHERE amount > 
+```
