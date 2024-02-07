@@ -7,7 +7,6 @@ SQL (Structured Query Language) is a standard language for storing, manipulating
 
 #### Basic SQL Commands
 
-```
 - **SELECT**: Retrieves data from a database.
 - **INSERT INTO**: Inserts new data into a database.
 - **UPDATE**: Updates existing data within a database.
@@ -19,7 +18,7 @@ SQL (Structured Query Language) is a standard language for storing, manipulating
 - **DROP TABLE**: Deletes a table.
 - **CREATE INDEX**: Creates an index (search key).
 - **DROP INDEX**: Deletes an index.
-```
+
 
 #### SELECT Statement
 
