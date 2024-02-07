@@ -2,9 +2,8 @@
 
 #### Introduction to SQL
 
-```
 SQL (Structured Query Language) is a standard language for storing, manipulating, and retrieving data in databases. It works with relational databases like MySQL, PostgreSQL, SQL Server, and Oracle.
-```
+
 
 #### Basic SQL Commands
 
