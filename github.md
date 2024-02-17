@@ -98,8 +98,7 @@ git reset --hard [commit-hash]  # Reset to a specific commit
 
 #### Tips for Using Git
 
-```markdown
+
 - **Regular Commits**: Make small, frequent commits for better tracking and easier troubleshooting.
 - **Clear Commit Messages**: Write clear, descriptive commit messages.
-- **Branching Strategy**: Follow a 
-```
+- **Branching Strategy**: Follow a consistent branching strategy like Git Flow or Feature Branch Workflow. 
