@@ -5,89 +5,54 @@ This cheat sheet is designed for system administrators who manage high-availabil
 The commands listed here cover various aspects of cluster management, including checking cluster status, managing resources, nodes, and constraints. This guide aims to provide quick access to common Pacemaker commands, facilitating effective cluster management and troubleshooting.
 Pacemaker Commands
 
-## Cluster Status and Management
+#### Key Features of Pacemaker:
+1. **Resource Management**: Manages various types of services as resources.
+2. **Cluster Management**: Detects and responds to node failures.
+3. **Failover and Recovery**: Automatically relocates services during failures.
+4. **Resource Grouping**: Groups resources for collective management.
+5. **Constraints**: Supports various constraints for resource management.
+6. **STONITH**: Implements fencing mechanism for cluster safety.
+7. **Integration with Corosync**: Often used with Corosync for messaging and membership.
 
-- **pcs status**
-  - Displays the current status of the cluster.
+#### Cluster Status and Management
+- **pcs status**: Displays the current status of the cluster.
+- **pcs cluster start --all**: Starts all cluster services on all nodes.
+- **pcs cluster stop --all**: Stops all cluster services on all nodes.
+- **pcs cluster enable --all**: Enables cluster services to start at boot on all nodes.
+- **pcs cluster disable --all**: Disables cluster services from starting at boot.
 
-- **pcs cluster start --all**
-  - Starts all cluster services on all nodes.
+#### Resource Management
+- **pcs resource show**: Lists all cluster resources.
+- **pcs resource create [resource_id] [agent] [options]**: Creates a new cluster resource.
+- **pcs resource delete [resource_id]**: Deletes a cluster resource.
+- **pcs resource manage [resource_id]**: Manages a resource (enables cluster management).
+- **pcs resource unmanage [resource_id]**: Unmanages a resource (disables cluster management).
 
-- **pcs cluster stop --all**
-  - Stops all cluster services on all nodes.
+#### Node Management
+- **pcs status nodes**: Shows the status of all nodes in the cluster.
+- **pcs cluster standby [node]**: Sets a cluster node to standby mode.
+- **pcs cluster unstandby [node]**: Removes a cluster node from standby mode.
+- **pcs cluster cib**: Outputs the current cluster configuration.
 
-- **pcs cluster enable --all**
-  - Enables cluster services to start at boot on all nodes.
+#### Constraint Management
+- **pcs constraint list**: Lists all constraints in the cluster.
+- **pcs constraint create [constraint_options]**: Creates a new constraint.
+- **pcs constraint remove [constraint_id]**: Removes a constraint.
 
-- **pcs cluster disable --all**
-  - Disables cluster services from starting at boot.
+#### Cluster Configuration
+- **pcs property list**: Lists all cluster properties.
+- **pcs property set [property_name]=[value]**: Sets a cluster property.
+- **pcs stonith show**: Displays STONITH (fencing) devices and status.
+- **pcs stonith create [stonith_id] [agent] [options]**: Creates a new STONITH device.
+- **pcs stonith delete [stonith_id]**: Deletes a STONITH device.
 
-## Resource Management
+#### Troubleshooting and Logs
+- **pcs status failures**: Shows all failed actions in the cluster.
+- **corosync-cfgtool -s**: Displays the status of the Corosync ring.
+- **crm_mon -1**: Displays a one-time status of the current cluster.
 
-- **pcs resource show**
-  - Lists all cluster resources.
-
-- **pcs resource create [resource_id] [agent] [options]**
-  - Creates a new cluster resource.
-
-- **pcs resource delete [resource_id]**
-  - Deletes a cluster resource.
-
-- **pcs resource manage [resource_id]**
-  - Manages a resource (enables cluster management).
-
-- **pcs resource unmanage [resource_id]**
-  - Unmanages a resource (disables cluster management).
-
-## Node Management
-
-- **pcs status nodes**
-  - Shows the status of all nodes in the cluster.
-
-- **pcs cluster standby [node]**
-  - Sets a cluster node to standby mode.
-
-- **pcs cluster unstandby [node]**
-  - Removes a cluster node from standby mode.
-
-- **pcs cluster cib**
-  - Outputs the current cluster configuration.
-
-## Constraint Management
-
-- **pcs constraint list**
-  - Lists all constraints in the cluster.
-
-- **pcs constraint create [constraint_options]**
-  - Creates a new constraint.
-
-- **pcs constraint remove [constraint_id]**
-  - Removes a constraint.
-
-## Cluster Configuration
-
-- **pcs property list**
-  - Lists all cluster properties.
-
-- **pcs property set [property_name]=[value]**
-  - Sets a cluster property.
-
-- **pcs stonith show**
-  - Displays STONITH (fencing) devices and status.
-
-- **pcs stonith create [stonith_id] [agent] [options]**
-  - Creates a new STONITH device.
-
-- **pcs stonith delete [stonith_id]**
-  - Deletes a STONITH device.
-
-## Troubleshooting and Logs
-
-- **pcs status failures**
-  - Shows all failed actions in the cluster.
-
-- **corosync-cfgtool -s**
-  - Displays the status of the Corosync ring.
-
-- **crm_mon -1**
-  - Displays a one-time status of the current cluster.
+#### Tips for Using Pacemaker
+- **Regular Backups**: Regularly backup your cluster configuration.
+- **Monitoring**: Continuously monitor cluster health and performance.
+- **Documentation**: Maintain detailed documentation of your cluster setup.
+- **Testing**: Regularly test failover and recovery procedures.
