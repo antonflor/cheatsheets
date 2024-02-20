@@ -5,6 +5,8 @@ Google Cloud Platform (GCP) is a suite of cloud computing services that runs on 
 
 - **Purpose**: Offers services for computing, storage, networking, Big Data, Machine Learning, and the Internet of Things (IoT), as well as cloud management, security, and developer tools.
 
+---
+
 #### Core GCP Services
 **Compute Engine**
 - Provides scalable virtual machines.
