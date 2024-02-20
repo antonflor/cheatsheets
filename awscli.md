@@ -5,6 +5,8 @@ The AWS Command Line Interface (CLI) is a powerful tool to interact with AWS ser
 
 - **Purpose**: Manage AWS services, automate tasks, and script operations.
 
+---
+
 #### Configuration and Setup
 **Configure AWS CLI**
 - `aws configure`
@@ -125,6 +127,8 @@ The AWS Command Line Interface (CLI) is a powerful tool to interact with AWS ser
 **Delete RDS Instance**
 - `aws rds delete-db-instance --db-instance-identifier [id] --skip-final-snapshot`
 - Deletes an RDS database instance.
+
+---
 
 #### Tips for Using AWS CLI
 - **Scripting and Automation**: Integrate AWS CLI commands into scripts for automation of AWS services.
