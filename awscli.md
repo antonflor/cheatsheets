@@ -1,4 +1,4 @@
-### Expanded AWS CLI Cheat Sheet
+### AWS CLI Cheat Sheet
 
 #### Introduction to AWS CLI
 The AWS Command Line Interface (CLI) is a powerful tool to interact with AWS services, enabling scripting and automation for efficient cloud management.
