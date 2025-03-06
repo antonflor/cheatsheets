@@ -122,23 +122,20 @@ SELECT column_name, COUNT(*) FROM table_name GROUP BY column_name;
 
 #### SQL Data Types
 
-```
 - **Numeric**: INT, SMALLINT, DECIMAL, NUMERIC, FLOAT, REAL
 - **Character**: CHAR, VARCHAR, TEXT
 - **Date and Time**: DATE, TIME, TIMESTAMP
 - **Binary**: BINARY, VARBINARY, BLOB
-```
 
 #### SQL Constraints
 
-```
 - **NOT NULL**: Ensures that a column cannot have NULL value.
 - **UNIQUE**: Ensures that all values in a column are different.
 - **PRIMARY KEY**: A combination of NOT NULL and UNIQUE.
 - **FOREIGN KEY**: Uniquely identifies a row/record in another table.
 - **CHECK**: Ensures that all values in a column satisfy a specific condition.
 - **DEFAULT**: Sets a default value for a column when no value is specified.
-```
+
 
 #### SQL Indexes
 
