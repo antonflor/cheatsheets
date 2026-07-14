@@ -29,6 +29,7 @@ jobs:
               "README.md",
               "CONTRIBUTING.md",
               "STYLE_GUIDE.md",
+              "visual-guides.md",
               "arista.md",
               "aws.md",
               "azure.md",
@@ -45,6 +46,11 @@ jobs:
               "spanning-tree.md",
               "terraform.md",
           ]
+
+          supported_mermaid = re.compile(
+              r"^(flowchart|graph|sequenceDiagram|stateDiagram-v2|"
+              r"classDiagram|erDiagram|journey|gitGraph|mindmap|timeline)\b"
+          )
 
           errors = []
           for filename in files:
@@ -71,6 +77,26 @@ jobs:
                   if re.search(r"\[[^\]]*\]\(\s*\)", line):
                       errors.append(f"{filename}:{number}: empty Markdown link")
 
+              opening_count = text.count("```mermaid")
+              mermaid_blocks = re.findall(
+                  r"```mermaid\s*\n(.*?)```",
+                  text,
+                  flags=re.DOTALL,
+              )
+              if opening_count != len(mermaid_blocks):
+                  errors.append(f"{filename}: unclosed Mermaid code fence")
+
+              for index, block in enumerate(mermaid_blocks, start=1):
+                  first_line = next(
+                      (line.strip() for line in block.splitlines() if line.strip()),
+                      "",
+                  )
+                  if not supported_mermaid.match(first_line):
+                      errors.append(
+                          f"{filename}: Mermaid block {index} has an unsupported "
+                          f"or missing diagram declaration: {first_line!r}"
+                      )
+
           if errors:
               print("\n".join(errors))
               sys.exit(1)
@@ -94,6 +120,7 @@ jobs:
             README.md
             CONTRIBUTING.md
             STYLE_GUIDE.md
+            visual-guides.md
             arista.md
             aws.md
             azure.md
