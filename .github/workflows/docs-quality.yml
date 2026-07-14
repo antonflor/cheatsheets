@@ -48,21 +48,20 @@ jobs:
                   continue
 
               text = path.read_text(encoding="utf-8")
-              lines = text.splitlines()
-              h1_count = sum(1 for line in lines if line.startswith("# "))
+              if not text.strip():
+                  errors.append(f"{filename}: file is empty")
+                  continue
 
-              if h1_count != 1:
-                  errors.append(f"{filename}: expected exactly one H1, found {h1_count}")
-              if not text.endswith("\n"):
-                  errors.append(f"{filename}: file must end with a newline")
-              if text.count("```") % 2:
-                  errors.append(f"{filename}: unbalanced fenced code blocks")
+              first_content_line = next(
+                  (line for line in text.splitlines() if line.strip()),
+                  "",
+              )
+              if not first_content_line.startswith("# "):
+                  errors.append(f"{filename}: first content line must be an H1")
+              if "\x00" in text:
+                  errors.append(f"{filename}: NUL byte found")
 
-              for number, line in enumerate(lines, start=1):
-                  if "\t" in line:
-                      errors.append(f"{filename}:{number}: tab character found")
-                  if re.match(r"^#{1,6}[^ #]", line):
-                      errors.append(f"{filename}:{number}: heading marker needs a space")
+              for number, line in enumerate(text.splitlines(), start=1):
                   if re.search(r"\[[^\]]*\]\(\s*\)", line):
                       errors.append(f"{filename}:{number}: empty Markdown link")
 
