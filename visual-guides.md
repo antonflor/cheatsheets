@@ -5,6 +5,8 @@
 
 These Mermaid diagrams supplement the detailed cheat sheets with quick topology, lifecycle, and troubleshooting views. They are intentionally conceptual: use the linked reference pages for commands, platform differences, safety warnings, and implementation details.
 
+The collection is deliberately limited to concepts where visual relationships improve comprehension. Command-oriented cloud, CLI, and utility references remain text-first rather than receiving decorative diagrams.
+
 ## Spanning tree: root and alternate path
 
 Related reference: [spanning-tree.md](spanning-tree.md)
