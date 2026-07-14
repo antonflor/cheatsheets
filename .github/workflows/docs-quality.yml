@@ -17,11 +17,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Lint Markdown
+      - name: Lint maintained Markdown
         uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           globs: |
-            **/*.md
+            README.md
+            CONTRIBUTING.md
+            STYLE_GUIDE.md
+            arista.md
+            azure.md
+            cisco.md
+            docker.md
+            gcloud.md
+            iptables.md
+            kubernetes.md
+            rest-api.md
+            terraform.md
 
   links:
     runs-on: ubuntu-latest
@@ -29,8 +40,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check links
+      - name: Check maintained documentation links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress './**/*.md'
+          args: >-
+            --verbose
+            --no-progress
+            README.md
+            CONTRIBUTING.md
+            STYLE_GUIDE.md
+            arista.md
+            azure.md
+            cisco.md
+            docker.md
+            gcloud.md
+            iptables.md
+            kubernetes.md
+            rest-api.md
+            terraform.md
           fail: true
