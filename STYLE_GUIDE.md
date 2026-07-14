@@ -4,6 +4,28 @@
 
 Each file should help an engineer answer a specific operational question quickly. Prefer commands, decision points, expected output, and cautions over broad product descriptions.
 
+## Filename conventions
+
+Use descriptive lowercase kebab-case filenames:
+
+```text
+google-cloud.md
+leaf-spine.md
+spanning-tree.md
+```
+
+Rules:
+
+- Use the product or protocol name an engineer is likely to search for.
+- Separate words with hyphens, not underscores or compressed spellings.
+- Avoid filenames that are broader or narrower than the actual content.
+- Do not name a Git reference `github.md` unless the document is specifically about GitHub rather than Git.
+- Combine a platform overview and its primary CLI when they serve the same audience and would otherwise repeat concepts.
+- Keep separate files when tools have different lifecycles, safety models, or operational workflows, such as Terraform and Pulumi.
+- Avoid renaming stable single-word files only for cosmetic consistency.
+
+When renaming or merging files, update the README, cross-references, and documentation-quality workflow in the same change.
+
 ## Required metadata for maintained sheets
 
 Place these lines immediately below the title:
