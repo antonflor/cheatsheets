@@ -1,64 +1,177 @@
-# Terraform Command Cheat Sheet
+# Terraform CLI Cheat Sheet
 
-This cheat sheet is designed for DevOps engineers, cloud architects, and anyone who uses Terraform for infrastructure as code. Terraform, by HashiCorp, is an immensely popular tool for building, changing, and versioning infrastructure safely and efficiently.
+> **Applies to:** Terraform 1.x
+> **Last reviewed:** 2026-07-14
 
-The commands listed here range from basic setup and initialization to more advanced infrastructure management. This guide serves as a quick reference to essential Terraform commands, facilitating efficient infrastructure deployment and management.
-Terraform Commands
+A quick reference for formatting, validating, planning, applying, inspecting, and carefully repairing Terraform-managed infrastructure.
 
-## Setup and Initialization
+## Safety
 
-- **terraform init**
-  - Initializes a new or existing Terraform configuration.
+> [!WARNING]
+> Review every plan before applying it. State commands can change Terraform’s record without changing real infrastructure. Back up remote state and confirm locking before manual state repair.
 
-- **terraform version**
-  - Displays the current Terraform version.
+## Daily workflow
 
-- **terraform validate**
-  - Validates the Terraform files in a directory.
+```bash
+terraform version
+terraform fmt --recursive
+terraform init
+terraform validate
+terraform plan -out=tfplan
+terraform show tfplan
+terraform apply tfplan
+```
 
-## Plan and Apply
+Use a saved plan when the reviewed plan must be exactly the one applied. Never commit plan files because they can contain sensitive values.
 
-- **terraform plan**
-  - Creates an execution plan.
+## Initialization and providers
 
-- **terraform apply**
-  - Applies the changes required to reach the desired state of the configuration.
+```bash
+terraform init
+terraform init -upgrade
+terraform providers
+terraform providers schema -json
+terraform providers lock \
+  -platform=linux_amd64 \
+  -platform=darwin_arm64
+```
 
-- **terraform apply "planfile"**
-  - Applies the changes in a Terraform plan file.
+Commit `.terraform.lock.hcl`. Do not commit `.terraform/`.
 
-## State Management
+## Planning
 
-- **terraform state list**
-  - Lists resources in the state file.
+```bash
+terraform plan
+terraform plan -out=tfplan
+terraform plan -refresh-only
+terraform plan -destroy
+terraform plan -var-file=<environment>.tfvars
+terraform plan -target=<resource-address>
+```
 
-- **terraform state show [resource]**
-  - Shows the attributes of a resource in the state file.
+> [!CAUTION]
+> `-target` is intended for exceptional recovery or focused troubleshooting. Re-run a full plan afterward to detect remaining drift.
 
-- **terraform state rm [resource]**
-  - Removes a resource from the state file.
+## Applying and destroying
 
-## Workspace Management
+```bash
+terraform apply
+terraform apply tfplan
+terraform apply -refresh-only
+terraform destroy
+```
 
-- **terraform workspace list**
-  - Lists all existing workspaces.
+Avoid `-auto-approve` in interactive production workflows unless a reviewed automation pipeline controls the inputs and plan.
 
-- **terraform workspace new [name]**
-  - Creates a new workspace.
+## Outputs and inspection
 
-- **terraform workspace select [name]**
-  - Selects an existing workspace.
+```bash
+terraform output
+terraform output -json
+terraform show
+terraform show -json tfplan
+terraform console
+terraform graph
+```
 
-## Misc Commands
+## Workspaces
 
-- **terraform import [resource.address] [id]**
-  - Imports existing infrastructure into Terraform.
+```bash
+terraform workspace show
+terraform workspace list
+terraform workspace new <name>
+terraform workspace select <name>
+terraform workspace delete <name>
+```
 
-- **terraform taint [resource]**
-  - Marks a resource for recreation on the next apply.
+CLI workspaces share a backend and configuration. They are not a complete isolation boundary for environments with different credentials, policies, or blast radii.
 
-- **terraform untaint [resource]**
-  - Removes the 'taint' from a resource.
+## State inspection and repair
 
-- **terraform graph**
-  - Generates a visual representation of either a configuration or execution plan.
+```bash
+terraform state list
+terraform state show <resource-address>
+terraform state pull > state-backup.json
+terraform state mv <source-address> <destination-address>
+terraform state rm <resource-address>
+```
+
+Before a manual state change:
+
+1. stop concurrent runs;
+2. confirm state locking;
+3. save a state backup;
+4. document the intended mapping;
+5. run a full plan afterward.
+
+## Import existing infrastructure
+
+Terraform supports import blocks in configuration:
+
+```hcl
+import {
+  to = <resource-address>
+  id = "<provider-resource-id>"
+}
+```
+
+Then run:
+
+```bash
+terraform plan
+```
+
+The legacy CLI form is still available:
+
+```bash
+terraform import <resource-address> <provider-resource-id>
+```
+
+Import adds an object to state; it does not automatically produce a complete, maintainable configuration.
+
+## Replace a resource
+
+Prefer a reviewable plan using `-replace`:
+
+```bash
+terraform plan -replace=<resource-address> -out=tfplan
+terraform apply tfplan
+```
+
+`terraform taint` is deprecated. Do not teach it as the normal replacement workflow.
+
+## Dependency and configuration troubleshooting
+
+```bash
+terraform fmt -check -recursive
+terraform validate
+terraform providers
+terraform state list
+terraform plan -refresh-only
+TF_LOG=DEBUG terraform plan
+```
+
+Debug logs can contain sensitive values. Store and share them carefully, then unset logging:
+
+```bash
+unset TF_LOG
+unset TF_LOG_PATH
+```
+
+## Locked state
+
+Investigate the active lock owner before using:
+
+```bash
+terraform force-unlock <lock-id>
+```
+
+> [!DANGER]
+> Forcing an active lock can allow concurrent state writes and corrupt state. Use it only after proving that the locking process is gone.
+
+## Official references
+
+- [Terraform CLI documentation](https://developer.hashicorp.com/terraform/cli)
+- [Terraform state commands](https://developer.hashicorp.com/terraform/cli/commands/state)
+- [Replace resources](https://developer.hashicorp.com/terraform/cli/state/taint)
+- [Import existing resources](https://developer.hashicorp.com/terraform/language/import)
