@@ -24,7 +24,6 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 | OSPF | [ospf.md](ospf.md) |
 | TCP | [tcp.md](tcp.md) |
 | UDP | [udp.md](udp.md) |
-| QUIC, MASQUE, and SRv6 | [quic-masque-srv6.md](quic-masque-srv6.md) |
 
 ## Network platforms and routing software
 
@@ -94,7 +93,7 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 
 Accuracy-sensitive documents should include an **Applies to** line and a **Last reviewed** date. A review date means the examples received a documentation review; it does not guarantee compatibility with every release or environment.
 
-Repository quality checks validate Markdown and links on pull requests and changes to `main`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [STYLE_GUIDE.md](STYLE_GUIDE.md) before adding or substantially rewriting a sheet.
+Repository quality checks validate the maintained documentation surface on pull requests and changes to `main`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [STYLE_GUIDE.md](STYLE_GUIDE.md) before adding or substantially rewriting a sheet.
 
 ## License
 
