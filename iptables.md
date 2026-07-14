@@ -1,102 +1,190 @@
-# iptables Command Cheat Sheet
+# iptables Cheat Sheet
 
-This document provides a comprehensive list of iptables commands, crucial for network administrators and security professionals. iptables is the default firewall tool on Linux systems, used for network packet filtering and manipulation.
+> **Applies to:** Linux systems using the iptables command interface
+> **Last reviewed:** 2026-07-14
 
-The cheat sheet covers basic to advanced iptables functionalities, including setting up firewalls, NAT, port forwarding, and managing traffic rules. It serves as a handy guide for securing Linux systems and managing network traffic flows. Given the powerful nature of iptables, it is advised to use these commands with caution, as incorrect usage can lead to network outages or security vulnerabilities.
+`iptables` is still widely used, but many current Linux distributions use the nftables framework underneath or prefer the native `nft` command. Confirm whether the host uses `iptables-legacy`, `iptables-nft`, firewalld, UFW, or native nftables before changing rules.
 
----
+## Safety
 
-1. **List All Rules**
-   - `sudo iptables -L`
-   - Lists all active rules.
-2. **List Rules with Numbers**
-   - `sudo iptables -L --line-numbers`
-   - Lists rules with line numbers for easier management.
-3. **Delete Rule by Number**
-   - `sudo iptables -D INPUT [LINE_NUMBER]`
-   - Deletes a specific rule from the INPUT chain.
-4. **Set Default Policy**
-   - `sudo iptables -P [CHAIN] [POLICY]`
-   - Sets the default policy (e.g., ACCEPT, DROP) for a chain (e.g., INPUT, OUTPUT).
-5. **Allow Specific Port (TCP)**
-   - `sudo iptables -A INPUT -p tcp --dport [PORT] -j ACCEPT`
-   - Allows incoming traffic on a specific TCP port.
-6. **Allow Specific Port (UDP)**
-   - `sudo iptables -A INPUT -p udp --dport [PORT] -j ACCEPT`
-   - Allows incoming traffic on a specific UDP port.
-7. **Drop Traffic from an IP Address**
-   - `sudo iptables -A INPUT -s [IP_ADDRESS] -j DROP`
-   - Blocks all incoming traffic from a specific IP address.
-8. **Allow Traffic from an IP Address**
-   - `sudo iptables -A INPUT -s [IP_ADDRESS] -j ACCEPT`
-   - Allows all incoming traffic from a specific IP address.
-9. **Reject Traffic on a Port**
-   - `sudo iptables -A INPUT -p tcp --dport [PORT] -j REJECT`
-   - Rejects traffic on a specific port.
-10. **Save iptables Rules**
-    - `sudo iptables-save > /etc/iptables/rules.v4`
-    - Saves the current rules to a file (Debian-based systems).
-11. **Flush All Rules**
-    - `sudo iptables -F`
-    - Removes all rules.
+> [!DANGER]
+> A remote firewall change can immediately lock you out. Keep an existing privileged session open, save the current rules, schedule an automatic rollback when possible, and verify console or out-of-band access.
 
----
+## Identify the firewall backend
 
-1. **Log Dropped Packets**
-   - `sudo iptables -A INPUT -j LOG --log-prefix "IPTables-Dropped: " --log-level 4`
-   - Logs dropped packets for debugging.
-2. **Limit Connections per Second**
-   - `sudo iptables -A INPUT -p tcp --dport [PORT] -m limit --limit [RATE] -j ACCEPT`
-   - Limits the number of connections per second to a port.
-3. **Port Forwarding**
-   - `sudo iptables -t nat -A PREROUTING -p tcp --dport [PORT] -j DNAT --to-destination [DEST_IP]:[DEST_PORT]`
-   - Forwards traffic from one port to another IP and port.
-4. **Masquerade (NAT)**
-   - `sudo iptables -t nat -A POSTROUTING -o [OUT_INTERFACE] -j MASQUERADE`
-   - Enables NAT for outgoing traffic on an interface.
-5. **Drop Invalid Packets**
-   - `sudo iptables -A INPUT -m state --state INVALID -j DROP`
-   - Drops packets that are invalid.
-6. **Allow Established and Related Connections**
-   - `sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT`
-   - Allows incoming traffic related to established connections.
-7. **Block Outgoing Traffic to a Domain**
-   - `sudo iptables -A OUTPUT -p tcp -d [DOMAIN] --dport 80 -j DROP`
-   - Blocks outgoing HTTP traffic to a specific domain.
-8. **Redirect Traffic to Another Port**
-   - `sudo iptables -t nat -A PREROUTING -p tcp --dport [PORT] -j REDIRECT --to-port [NEW_PORT]`
-   - Redirects traffic from one port to another port on the same machine.
-9. **Block Ping Requests**
-   - `sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP`
-   - Blocks ICMP echo requests (ping).
-10. **Allow Traffic on Multiple Ports**
-    - `sudo iptables -A INPUT -p tcp -m multiport --dports [PORT1],[PORT2],[PORT3] -j ACCEPT`
-    - Allows traffic on multiple specified ports.
-11. **Rate Limiting Incoming Connections**
-    - `sudo iptables -A INPUT -p tcp --dport [PORT] -m state --state NEW -m recent --set`
-    - `sudo iptables -A INPUT -p tcp --dport [PORT] -m state --state NEW -m recent --update --seconds [SECONDS] --hitcount [HITCOUNT] -j DROP`
-    - Limits new connections to a port within a given timeframe.
-12. **Block Traffic from a Specific Network**
-    - `sudo iptables -A INPUT -s [NETWORK/MASK] -j DROP`
-    - Blocks all incoming traffic from a specific network.
-13. **Allow Traffic Only from a Specific Network**
-    - `sudo iptables -A INPUT -s [NETWORK/MASK] -j ACCEPT`
-    - Allows traffic only from a specific network.
-14. **Log New Connections**
-    - `sudo iptables -A INPUT -m state --state NEW -j LOG --log-prefix "New Connection: "`
-    - Logs new incoming connections.
-15. **Drop Outgoing Traffic to a Specific Port**
-    - `sudo iptables -A OUTPUT -p tcp --dport [PORT] -j DROP`
-    - Blocks outgoing traffic to a specific port.
-16. **Redirect All HTTP Traffic to HTTPS**
-    - `sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 443`
-    - Redirects all HTTP traffic to HTTPS.
-17. **Block Outgoing SMTP Mail**
-    - `sudo iptables -A OUTPUT -p tcp --dport 25 -j REJECT`
-    - Blocks outgoing SMTP mail.
-18. **Allow SSH Access from a Specific Network**
-    - `sudo iptables -A INPUT -p tcp --dport 22 -s [NETWORK/MASK] -j ACCEPT`
-    - Allows SSH access only from a specific network.
-19. **Block Outgoing Telnet**
-    - `sudo iptables -A OUTPUT -p tcp --dport 23 -j DROP`
-    - Blocks outgoing Telnet connections.
+```bash
+iptables --version
+update-alternatives --display iptables 2>/dev/null || true
+nft list ruleset
+systemctl status firewalld --no-pager
+ufw status verbose
+```
+
+## Back up and inspect
+
+```bash
+sudo iptables-save > "iptables-backup-$(date +%Y%m%d-%H%M%S).rules"
+sudo iptables -S
+sudo iptables -L --numeric --verbose --line-numbers
+sudo iptables -t nat -S
+sudo iptables -t mangle -S
+```
+
+Use `-C` to check whether a rule already exists:
+
+```bash
+sudo iptables -C INPUT -p tcp --dport <port> -j ACCEPT
+```
+
+## Common stateful rules
+
+Prefer `conntrack` rather than the older `state` match:
+
+```bash
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A INPUT -i lo -j ACCEPT
+```
+
+Allow SSH from a management network:
+
+```bash
+sudo iptables -A INPUT \
+  -p tcp \
+  -s <management-cidr> \
+  --dport 22 \
+  -m conntrack --ctstate NEW \
+  -j ACCEPT
+```
+
+Allow a TCP or UDP service:
+
+```bash
+sudo iptables -A INPUT -p tcp --dport <port> -j ACCEPT
+sudo iptables -A INPUT -p udp --dport <port> -j ACCEPT
+```
+
+## Rule order
+
+Rules are evaluated in order. Insert a rule at a specific position when required:
+
+```bash
+sudo iptables -I INPUT <line-number> <rule-specification>
+```
+
+Delete by exact rule specification when possible:
+
+```bash
+sudo iptables -D INPUT -p tcp --dport <port> -j ACCEPT
+```
+
+Or review numbered rules and then delete a line:
+
+```bash
+sudo iptables -L INPUT --numeric --line-numbers
+sudo iptables -D INPUT <line-number>
+```
+
+Line numbers change after deletion, so list the chain again before deleting another rule.
+
+## Default policies
+
+Inspect current policies before changing them:
+
+```bash
+sudo iptables -S
+```
+
+Example policy change:
+
+```bash
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+```
+
+> [!WARNING]
+> Add required management, loopback, established-session, and service rules **before** setting a default DROP policy.
+
+## Logging with rate limiting
+
+```bash
+sudo iptables -A INPUT \
+  -m limit --limit 5/min --limit-burst 10 \
+  -j LOG --log-prefix "iptables-input-drop: " --log-level warning
+```
+
+An unconditional LOG rule can flood system logs.
+
+## NAT and forwarding
+
+Enable IPv4 forwarding using persistent system configuration rather than a one-off command:
+
+```bash
+sysctl net.ipv4.ip_forward
+```
+
+Masquerade traffic leaving an interface:
+
+```bash
+sudo iptables -t nat -A POSTROUTING -o <egress-interface> -j MASQUERADE
+```
+
+Destination NAT:
+
+```bash
+sudo iptables -t nat -A PREROUTING \
+  -i <ingress-interface> \
+  -p tcp --dport <external-port> \
+  -j DNAT --to-destination <destination-ip>:<destination-port>
+```
+
+Also permit the forwarded traffic in the `FORWARD` chain and validate the return path.
+
+## Rate limiting
+
+```bash
+sudo iptables -A INPUT \
+  -p tcp --dport <port> \
+  -m conntrack --ctstate NEW \
+  -m limit --limit <rate>/second --limit-burst <burst> \
+  -j ACCEPT
+```
+
+## Misleading patterns to avoid
+
+- An iptables destination using a DNS name is resolved when the rule is created; it does not continuously track DNS changes.
+- Redirecting TCP port 80 to 443 does not add TLS. The application on the destination port must actually speak TLS.
+- Dropping all ICMP can break Path MTU Discovery and troubleshooting. Filter specific types only with a documented reason.
+- Flushing rules remotely without a tested rollback can disconnect the host.
+
+## Persistence
+
+Persistence is distribution-specific. On Debian-based systems using `iptables-persistent`:
+
+```bash
+sudo iptables-save | sudo tee /etc/iptables/rules.v4 >/dev/null
+sudo ip6tables-save | sudo tee /etc/iptables/rules.v6 >/dev/null
+```
+
+Verify the persistence service and restore behavior before rebooting.
+
+## Restore and rollback
+
+Validate a saved ruleset in a lab when possible, then restore:
+
+```bash
+sudo iptables-restore < iptables-backup.rules
+```
+
+For remote maintenance, use `iptables-apply` when available because it can automatically roll back unconfirmed changes:
+
+```bash
+sudo iptables-apply
+```
+
+## Official references
+
+- [Netfilter documentation](https://www.netfilter.org/documentation/)
+- [iptables manual](https://man7.org/linux/man-pages/man8/iptables.8.html)
+- [nftables wiki](https://wiki.nftables.org/)
