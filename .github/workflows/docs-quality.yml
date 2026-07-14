@@ -44,6 +44,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
+            --offline
             --verbose
             --no-progress
             README.md
