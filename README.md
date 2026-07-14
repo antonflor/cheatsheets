@@ -16,6 +16,8 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 
 ## Visual guides
 
+The diagrams are intentionally limited to concepts where visual relationships improve understanding; command-oriented references remain text-first.
+
 | Concept | Visual reference | Detailed reference |
 |---|---|---|
 | Spanning-tree root and alternate path | [Visual guide](visual-guides.md#spanning-tree-root-and-alternate-path) | [spanning-tree.md](spanning-tree.md) |
