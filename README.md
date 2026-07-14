@@ -11,7 +11,19 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 - Start with read-only inspection commands and capture the current state.
 - Treat `clear`, `delete`, `destroy`, `flush`, `reset`, `prune`, and `--force` operations as destructive.
 - Prefer official documentation for release-specific behavior.
+- Use [visual-guides.md](visual-guides.md) for topology, lifecycle, state-transition, and troubleshooting diagrams.
 - Open a content-correction issue when a command is obsolete, unsafe, ambiguous, or vendor-specific.
+
+## Visual guides
+
+| Concept | Visual reference | Detailed reference |
+|---|---|---|
+| Spanning-tree root and alternate path | [Visual guide](visual-guides.md#spanning-tree-root-and-alternate-path) | [spanning-tree.md](spanning-tree.md) |
+| Leaf-spine topology | [Visual guide](visual-guides.md#leaf-spine-fabric) | [leaf-spine.md](leaf-spine.md) |
+| Pulumi change lifecycle | [Visual guide](visual-guides.md#pulumi-change-lifecycle) | [pulumi.md](pulumi.md) |
+| Linux boot sequence | [Visual guide](visual-guides.md#linux-boot-sequence) | [linux-boot.md](linux-boot.md) |
+| Git branch and pull-request workflow | [Visual guide](visual-guides.md#git-branch-and-pull-request-workflow) | [git.md](git.md) |
+| Operational troubleshooting sequence | [Visual guide](visual-guides.md#operational-troubleshooting-sequence) | [STYLE_GUIDE.md](STYLE_GUIDE.md) |
 
 ## Networking fundamentals
 
