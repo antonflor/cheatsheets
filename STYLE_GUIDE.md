@@ -50,6 +50,33 @@ Do not use realistic credentials, public IP addresses belonging to third parties
 
 For state-changing commands, show a read-only verification command first and add an inline warning when the operation is destructive.
 
+## Visual diagrams
+
+Use Mermaid when a diagram explains relationships that are harder to understand as a flat list. Good candidates include:
+
+- physical or logical topology;
+- packet, request, or control-plane paths;
+- state transitions;
+- deployment and infrastructure lifecycles;
+- decision trees;
+- failure domains;
+- ordered boot or troubleshooting sequences.
+
+Do not add a diagram merely to repeat a command list, glossary, or short numbered procedure. A diagram should make a specific concept faster to understand.
+
+Guidelines:
+
+- Keep diagrams conceptual unless the document is explicitly vendor-specific.
+- Use labels that remain readable in both GitHub light and dark themes.
+- Avoid custom colors and styling unless they convey essential meaning.
+- Keep node and edge counts low enough to read without zooming.
+- Add a short explanation before or after each diagram.
+- State important simplifications and do not imply that one diagram represents every vendor or failure case.
+- Link visual guides to the detailed operational reference containing commands and cautions.
+- Prefer one focused diagram over a large all-in-one architecture drawing.
+
+The repository-wide diagrams live in [visual-guides.md](visual-guides.md). Topic files may embed a diagram directly when it is essential to understanding that specific page.
+
 ## Troubleshooting order
 
 Troubleshooting sections should generally proceed in this order:
