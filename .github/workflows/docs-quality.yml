@@ -30,13 +30,19 @@ jobs:
               "CONTRIBUTING.md",
               "STYLE_GUIDE.md",
               "arista.md",
+              "aws.md",
               "azure.md",
               "cisco.md",
               "docker.md",
-              "gcloud.md",
+              "git.md",
+              "google-cloud.md",
               "iptables.md",
               "kubernetes.md",
+              "leaf-spine.md",
+              "linux-boot.md",
+              "pulumi.md",
               "rest-api.md",
+              "spanning-tree.md",
               "terraform.md",
           ]
 
@@ -89,12 +95,18 @@ jobs:
             CONTRIBUTING.md
             STYLE_GUIDE.md
             arista.md
+            aws.md
             azure.md
             cisco.md
             docker.md
-            gcloud.md
+            git.md
+            google-cloud.md
             iptables.md
             kubernetes.md
+            leaf-spine.md
+            linux-boot.md
+            pulumi.md
             rest-api.md
+            spanning-tree.md
             terraform.md
           fail: true
