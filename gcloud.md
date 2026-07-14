@@ -1,101 +1,141 @@
-### GCP `gcloud` CLI Cheat Sheet
+# Google Cloud CLI Cheat Sheet
 
-#### Introduction to GCP `gcloud` CLI
-The `gcloud` command-line interface is a part of the Google Cloud SDK and provides a way to manage GCP services and resources.
+> **Applies to:** Current Google Cloud CLI (`gcloud`)
+> **Last reviewed:** 2026-07-14
 
-- **Purpose**: Manage GCP resources, automate tasks, and handle administrative tasks.
+A practical reference for authentication, configuration, Compute Engine, GKE, Cloud Storage, IAM, and networking.
 
----
+## Authentication and configuration
 
-#### Initial Setup and Configuration
-**Install Google Cloud SDK**
-- Installation varies by operating system and is available on the GCP documentation site.
+```bash
+gcloud version
+gcloud init
+gcloud auth login
+gcloud auth list
+gcloud config configurations list
+gcloud config list
+gcloud config set project <project-id>
+gcloud config set compute/region <region>
+gcloud config set compute/zone <zone>
+gcloud projects list
+```
 
-**Initialize gcloud CLI**
-- `gcloud init`
-- Initializes the gcloud environment, sets up the default configuration, project, and authenticates user.
+For local Application Default Credentials used by client libraries:
 
-**Set Default Project**
-- `gcloud config set project [PROJECT_ID]`
-- Sets a default project for gcloud commands.
+```bash
+gcloud auth application-default login
+```
 
-#### Managing Compute Engine
-**List Compute Instances**
-- `gcloud compute instances list`
-- Lists all Compute Engine instances in the current project.
+> [!WARNING]
+> Do not confuse user CLI credentials with Application Default Credentials. Use workload identity or service-account impersonation for automation instead of downloading long-lived keys whenever possible.
 
-**Create Compute Instance**
-- `gcloud compute instances create [INSTANCE_NAME] --zone [ZONE]`
-- Creates a new Compute Engine instance in the specified zone.
+## Service-account impersonation
 
-**Stop Compute Instance**
-- `gcloud compute instances stop [INSTANCE_NAME] --zone [ZONE]`
-- Stops a running Compute Engine instance.
+```bash
+gcloud auth print-access-token \
+  --impersonate-service-account=<service-account-email>
 
-**Delete Compute Instance**
-- `gcloud compute instances delete [INSTANCE_NAME] --zone [ZONE]`
-- Deletes a specified Compute Engine instance.
+gcloud config set auth/impersonate_service_account <service-account-email>
+gcloud config unset auth/impersonate_service_account
+```
 
-#### Working with Kubernetes Engine
-**List Kubernetes Clusters**
-- `gcloud container clusters list`
-- Lists all Kubernetes clusters in the current project.
+## Compute Engine
 
-**Create Kubernetes Cluster**
-- `gcloud container clusters create [CLUSTER_NAME] --zone [ZONE]`
-- Creates a new Kubernetes cluster in the specified zone.
+```bash
+gcloud compute instances list
+gcloud compute instances describe <instance> --zone=<zone>
+gcloud compute instances create <instance> \
+  --zone=<zone> \
+  --machine-type=<machine-type> \
+  --image-family=debian-12 \
+  --image-project=debian-cloud
+gcloud compute ssh <instance> --zone=<zone>
+gcloud compute instances stop <instance> --zone=<zone>
+gcloud compute instances start <instance> --zone=<zone>
+gcloud compute instances delete <instance> --zone=<zone>
+```
 
-**Get Kubernetes Cluster Credentials**
-- `gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE]`
-- Fetches credentials for interacting with the Kubernetes cluster.
+## Google Kubernetes Engine
 
-**Delete Kubernetes Cluster**
-- `gcloud container clusters delete [CLUSTER_NAME] --zone [ZONE]`
-- Deletes a specified Kubernetes cluster.
+```bash
+gcloud container clusters list
+gcloud container clusters describe <cluster> --location=<region-or-zone>
+gcloud container clusters get-credentials <cluster> \
+  --location=<region-or-zone>
+gcloud container clusters create <cluster> \
+  --location=<region-or-zone> \
+  --num-nodes=3
+gcloud container clusters resize <cluster> \
+  --location=<region-or-zone> \
+  --num-nodes=<count>
+gcloud container clusters delete <cluster> \
+  --location=<region-or-zone>
+```
 
-#### Managing Cloud Storage
-**List Storage Buckets**
-- `gsutil ls`
-- Lists all Cloud Storage buckets in the current project.
+## Cloud Storage
 
-**Create Storage Bucket**
-- `gsutil mb gs://[BUCKET_NAME]`
-- Creates a new Cloud Storage bucket.
+Use the current `gcloud storage` command group for new scripts:
 
-**Copy Files to/from Storage Bucket**
-- `gsutil cp [LOCAL_FILE] gs://[BUCKET_NAME]/[OBJECT_NAME]`
-- `gsutil cp gs://[BUCKET_NAME]/[OBJECT_NAME] [LOCAL_FILE]`
-- Copies files to or from a Cloud Storage bucket.
+```bash
+gcloud storage buckets list
+gcloud storage buckets create gs://<bucket> --location=<location>
+gcloud storage ls gs://<bucket>
+gcloud storage cp <local-file> gs://<bucket>/<object>
+gcloud storage cp gs://<bucket>/<object> <local-path>
+gcloud storage rsync --recursive <local-directory> gs://<bucket>/<prefix>
+gcloud storage rm gs://<bucket>/<object>
+```
 
-#### Managing IAM and Service Accounts
-**List IAM Roles**
-- `gcloud iam roles list`
-- Lists all available IAM roles in the current project.
+`gsutil` remains available in many installations, but do not introduce it into new automation unless compatibility requires it.
 
-**Create Service Account**
-- `gcloud iam service-accounts create [ACCOUNT_NAME]`
-- Creates a new service account.
+## IAM and service accounts
 
-**Assign IAM Role to Service Account**
-- `gcloud projects add-iam-policy-binding [PROJECT_ID] --member "serviceAccount:[ACCOUNT_NAME]@[PROJECT_ID].iam.gserviceaccount.com" --role "[ROLE]"`
-- Assigns an IAM role to a service account.
+```bash
+gcloud iam roles list
+gcloud iam service-accounts list
+gcloud iam service-accounts create <name> \
+  --display-name="<display-name>"
+gcloud projects get-iam-policy <project-id>
+gcloud projects add-iam-policy-binding <project-id> \
+  --member="serviceAccount:<service-account-email>" \
+  --role="roles/<role>"
+```
 
-#### Networking and VPC
-**List VPC Networks**
-- `gcloud compute networks list`
-- Lists all VPC networks in the current project.
+Avoid project-owner and broad primitive roles. Prefer predefined or custom roles with the minimum required permissions.
 
-**Create VPC Network**
-- `gcloud compute networks create [NETWORK_NAME] --subnet-mode=custom`
-- Creates a new VPC network with custom subnet mode.
+## VPC networking
 
-**Create Firewall Rule**
-- `gcloud compute firewall-rules create [RULE_NAME] --network [NETWORK_NAME] --allow [PROTOCOL]:[PORT]`
-- Creates a firewall rule in the specified VPC network.
+```bash
+gcloud compute networks list
+gcloud compute networks describe <network>
+gcloud compute networks create <network> --subnet-mode=custom
+gcloud compute networks subnets list
+gcloud compute networks subnets create <subnet> \
+  --network=<network> \
+  --region=<region> \
+  --range=<cidr>
+gcloud compute firewall-rules list
+gcloud compute firewall-rules create <rule> \
+  --network=<network> \
+  --direction=INGRESS \
+  --action=ALLOW \
+  --rules=tcp:<port> \
+  --source-ranges=<cidr>
+```
 
----
+## Output and troubleshooting
 
-#### Tips for Using GCP `gcloud` CLI
-- **Regular Updates**: Keep the Google Cloud SDK updated for the latest features and security updates.
-- **Useful Flags**: Explore flags like `--format` to customize output and `--help` for command usage.
-- **Scripting**: Integrate `gcloud` commands into scripts for automation and efficient cloud management.
+```bash
+gcloud <group> <command> --help
+gcloud info
+gcloud topic formats
+gcloud compute instances list \
+  --format='table(name,zone.basename(),status,networkInterfaces[0].networkIP)'
+gcloud components update
+```
+
+## References
+
+- [Google Cloud CLI documentation](https://cloud.google.com/sdk/gcloud)
+- [Cloud Storage with the gcloud CLI](https://cloud.google.com/storage/docs/discover-object-storage-gcloud)
+- [Service-account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation)

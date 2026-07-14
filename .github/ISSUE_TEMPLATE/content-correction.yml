@@ -1,0 +1,40 @@
+name: Content correction
+description: Report an inaccurate, obsolete, unsafe, or unclear command or explanation
+title: "[Correction]: "
+labels:
+  - documentation
+body:
+  - type: input
+    id: file
+    attributes:
+      label: File
+      description: Which cheat sheet needs correction?
+      placeholder: docker.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain what is inaccurate, obsolete, unsafe, or unclear.
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Platform and version
+      description: Include the product, operating system, and version when relevant.
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+      description: Provide corrected wording or commands when possible.
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Official references
+      description: Link the relevant vendor, project, or standards documentation.

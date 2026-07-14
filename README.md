@@ -1,28 +1,100 @@
-# Cheatsheets Repository
+# Infrastructure and Network Engineering Cheatsheets
 
-Welcome to the Cheatsheets Repository – your one-stop hub for quick-reference guides in the world of networking and technology. This repository is dedicated to providing concise, easy-to-understand cheat sheets for a range of technologies including Cisco, Juniper, Arista, and more.
+Practical quick-reference notes for network engineering, Linux operations, cloud platforms, infrastructure automation, and troubleshooting.
 
----
+> [!WARNING]
+> These notes are a memory aid, not a substitute for vendor documentation, change review, backups, or a tested rollback plan. Commands that alter state can cause outages or data loss. Validate syntax against the exact software and platform release you operate.
 
-**Key Features:**
+## How to use this repository
 
-- **Comprehensive Coverage:** From basic commands to advanced configurations, our cheat sheets span a wide array of topics and technologies.
-- **User-Friendly Format:** Designed for both beginners and seasoned professionals, these cheat sheets are structured to provide information at a glance.
-- **Regular Updates:** The tech world is always evolving, and so are our cheat sheets. Stay up-to-date with the latest commands and functionalities.
-- **Community-Driven:** Contributions are welcome! Help us expand and refine our cheat sheets to cover more technologies and topics.
+- Replace values such as `<interface>`, `<namespace>`, and `<resource-id>` before running commands.
+- Start with read-only inspection commands and capture the current state.
+- Treat `clear`, `delete`, `destroy`, `flush`, `reset`, `prune`, and `--force` operations as destructive.
+- Prefer official documentation for release-specific behavior.
+- Open a content-correction issue when a command is obsolete, unsafe, ambiguous, or vendor-specific.
 
-**Ideal For:**
+## Networking fundamentals
 
-- Network Engineers and IT Professionals seeking quick references.
-- Students and educators in the field of Information Technology and Computer Science.
-- Anyone looking to expand their knowledge in networking technologies.
+| Topic | Reference |
+|---|---|
+| Clos fabrics | [clos.md](clos.md) |
+| Leaf-spine design | [leafspine.md](leafspine.md) |
+| LLDP | [lldp.md](lldp.md) |
+| OSI model | [osi.md](osi.md) |
+| OSPF | [ospf.md](ospf.md) |
+| TCP | [tcp.md](tcp.md) |
+| UDP | [udp.md](udp.md) |
 
-**Get Involved:**
+## Network platforms and routing software
 
-We encourage you to contribute and share your expertise. Whether it's fixing a typo, adding a new cheat sheet, or improving existing content, every bit of help is appreciated!
+| Platform | Reference |
+|---|---|
+| Arista EOS | [arista.md](arista.md) |
+| BIRD | [bird.md](bird.md) |
+| Cisco IOS / IOS XE | [cisco.md](cisco.md) |
+| Fortinet FortiGate | [fortinet.md](fortinet.md) |
+| Juniper Junos | [juniper.md](juniper.md) |
 
-**Navigate with Ease:**
+## Cisco contact center
 
-Our repository is organized for easy navigation, allowing you to quickly find the cheat sheet you need. Whether you're configuring a Cisco router, setting up a Juniper network, or exploring Arista technologies, the right information is just a click away.
+| Product | Reference |
+|---|---|
+| Cisco Unified Intelligence Center | [cisco-cuic.md](cisco-cuic.md) |
+| Cisco Unified Customer Voice Portal | [cisco-cvp.md](cisco-cvp.md) |
+| Cisco Intelligent Contact Management | [cisco-icm.md](cisco-icm.md) |
 
-**Join us in building the most comprehensive and user-friendly tech cheat sheets collection. Star, fork, and contribute today!**
+## Cloud platforms
+
+| Topic | Reference |
+|---|---|
+| AWS services | [awscloud.md](awscloud.md) |
+| AWS CLI | [awscli.md](awscli.md) |
+| Microsoft Azure and Azure CLI | [azure.md](azure.md) |
+| Google Cloud services | [gcpcloud.md](gcpcloud.md) |
+| Google Cloud CLI | [gcloud.md](gcloud.md) |
+
+## Containers, orchestration, and infrastructure as code
+
+| Topic | Reference |
+|---|---|
+| Docker and Docker Compose | [docker.md](docker.md) |
+| Kubernetes and kubectl | [kubernetes.md](kubernetes.md) |
+| Terraform | [terraform.md](terraform.md) |
+| Jenkins CI/CD | [jenkins-cicd.md](jenkins-cicd.md) |
+| Puppet | [puppet.md](puppet.md) |
+
+## Linux and operations
+
+| Topic | Reference |
+|---|---|
+| awk | [awk.md](awk.md) |
+| Debian | [debian.md](debian.md) |
+| HAProxy | [haproxy.md](haproxy.md) |
+| iptables | [iptables.md](iptables.md) |
+| Linux boot process | [linux_kernel_boot.md](linux_kernel_boot.md) |
+| nmap | [nmap.md](nmap.md) |
+| Pacemaker | [pacemaker.md](pacemaker.md) |
+| Corosync | [corosync.md](corosync.md) |
+| Regular expressions | [regex.md](regex.md) |
+| SCP | [scp.md](scp.md) |
+| sed | [sed.md](sed.md) |
+| Xen | [xen.md](xen.md) |
+
+## Development and data
+
+| Topic | Reference |
+|---|---|
+| Git | [github.md](github.md) |
+| Kafka | [kafka.md](kafka.md) |
+| REST APIs | [rest-api.md](rest-api.md) |
+| SQL | [sql.md](sql.md) |
+
+## Maintenance policy
+
+Accuracy-sensitive documents should include an **Applies to** line and a **Last reviewed** date. A review date means the examples received a documentation review; it does not guarantee compatibility with every release or environment.
+
+Repository quality checks validate the maintained documentation surface on pull requests and changes to `main`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [STYLE_GUIDE.md](STYLE_GUIDE.md) before adding or substantially rewriting a sheet.
+
+## License
+
+Content is available under the [MIT License](LICENSE).

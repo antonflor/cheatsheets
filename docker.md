@@ -1,108 +1,184 @@
-# Docker Command Cheat Sheet
+# Docker and Docker Compose Cheat Sheet
 
-This cheat sheet is intended for developers, DevOps engineers, and system administrators who use Docker for containerization. Docker is a popular platform for developing, shipping, and running applications in isolated environments called containers.
+> **Applies to:** Current Docker Engine and Docker Compose v2
+> **Last reviewed:** 2026-07-14
 
-The commands listed here provide a comprehensive guide for managing Docker containers, images, volumes, networks, and more. This guide aims to streamline Docker operations and offer quick access to common commands necessary for effective container management and deployment.
-Docker Commands
+A quick reference for inspecting and operating containers, images, networks, volumes, and Compose applications.
 
-## Container Management
+## Safety
 
-- **docker run [options] [image] [command]**
-  - Runs a command in a new container.
+> [!WARNING]
+> `rm`, `prune`, and Compose commands using `--volumes` can permanently remove containers or data. Inspect the target first and verify backups before deleting named volumes.
 
-- **docker ps**
-  - Lists running containers.
+## Environment and status
 
-- **docker ps -a**
-  - Lists all containers, including stopped ones.
+```bash
+docker version
+docker info
+docker context show
+docker system df
+```
 
-- **docker stop [container]**
-  - Stops a running container.
+## Containers
 
-- **docker start [container]**
-  - Starts a stopped container.
+```bash
+# List containers
+docker ps
+docker ps --all
 
-- **docker restart [container]**
-  - Restarts a container.
+# Run a disposable interactive container
+docker run --rm -it <image> <command>
 
-- **docker rm [container]**
-  - Removes a container.
+# Start, stop, and restart
+docker start <container>
+docker stop <container>
+docker restart <container>
 
-- **docker logs [container]**
-  - Fetches logs of a container.
+# Inspect state and resource use
+docker inspect <container>
+docker stats <container>
+docker top <container>
 
-## Image Management
+# Logs
+docker logs --tail 100 <container>
+docker logs --follow --since 10m <container>
 
-- **docker images**
-  - Lists all downloaded images.
+# Execute a command in a running container
+docker exec -it <container> <command>
 
-- **docker pull [image]**
-  - Pulls an image from a registry.
+# Copy files
+docker cp <container>:<container-path> <local-path>
+docker cp <local-path> <container>:<container-path>
+```
 
-- **docker push [image]**
-  - Pushes an image to a registry.
+Remove a stopped container only after checking it:
 
-- **docker rmi [image]**
-  - Removes an image.
+```bash
+docker inspect <container>
+docker rm <container>
+```
 
-- **docker build -t [tag] .**
-  - Builds an image from a Dockerfile in the current directory.
+## Images
 
-## Container Operations
+```bash
+docker image ls
+docker pull <image>:<tag>
+docker image inspect <image>:<tag>
+docker build --tag <repository>:<tag> .
+docker tag <source-image> <registry>/<repository>:<tag>
+docker push <registry>/<repository>:<tag>
+docker image history <image>:<tag>
+```
 
-- **docker exec -it [container] [command]**
-  - Executes a command in a running container.
+Remove an image:
 
-- **docker attach [container]**
-  - Attaches to a running container.
+```bash
+docker image rm <image>:<tag>
+```
 
-- **docker cp [container]:[path] [local_path]**
-  - Copies files from a container to the local filesystem.
+## Networks
 
-- **docker rename [old_container_name] [new_container_name]**
-  - Renames a container.
+```bash
+docker network ls
+docker network inspect <network>
+docker network create <network>
+docker network connect <network> <container>
+docker network disconnect <network> <container>
+docker port <container>
+```
 
-## Network Management
+## Volumes
 
-- **docker network ls**
-  - Lists networks.
+```bash
+docker volume ls
+docker volume inspect <volume>
+docker volume create <volume>
+```
 
-- **docker network create [options] [network]**
-  - Creates a new network.
+Before removing a volume, confirm that no container needs its data:
 
-- **docker network rm [network]**
-  - Removes a network.
+```bash
+docker ps --all --filter volume=<volume>
+docker volume rm <volume>
+```
 
-- **docker network connect [network] [container]**
-  - Connects a container to a network.
+## Docker Compose v2
 
-- **docker network disconnect [network] [container]**
-  - Disconnects a container from a network.
+Compose v2 uses the integrated `docker compose` command. The older `docker-compose` executable is legacy syntax.
 
-## Volume and Storage
+```bash
+# Validate and render the effective configuration
+docker compose config
 
-- **docker volume ls**
-  - Lists all volumes.
+# Start services
+docker compose up --detach
 
-- **docker volume create [volume]**
-  - Creates a new volume.
+# Show service state
+docker compose ps
 
-- **docker volume rm [volume]**
-  - Removes a volume.
+# Follow logs
+docker compose logs --follow --tail 100
 
-- **docker volume inspect [volume]**
-  - Inspects a volume.
+# Execute a command in a service container
+docker compose exec <service> <command>
 
-## Docker Compose
+# Pull and rebuild
+docker compose pull
+docker compose build --pull
 
-- **docker-compose up**
-  - Starts and runs the entire app defined in `docker-compose.yml`.
+# Restart one service
+docker compose restart <service>
 
-- **docker-compose down**
-  - Stops and removes containers, networks, images, and volumes.
+# Stop services without removing containers
+docker compose stop
 
-- **docker-compose build**
-  - Builds or rebuilds services.
+# Remove Compose containers and default networks
+docker compose down
+```
 
-- **docker-compose logs [service]**
-  - View output from containers.
+`docker compose down` does **not** remove named volumes or images by default. Destructive variants must be explicit:
+
+```bash
+# Also remove named and anonymous volumes
+docker compose down --volumes
+
+# Also remove images created or used by the project
+docker compose down --rmi local
+```
+
+## Cleanup
+
+Preview disk usage first:
+
+```bash
+docker system df --verbose
+docker container prune --filter until=24h
+docker image prune
+docker volume prune
+```
+
+> [!CAUTION]
+> `docker system prune --all --volumes` can remove unused images and volumes containing data. Do not use it as routine housekeeping without reviewing the impact.
+
+## Troubleshooting workflow
+
+```bash
+docker ps --all
+docker inspect <container>
+docker logs --tail 200 <container>
+docker stats --no-stream <container>
+docker network inspect <network>
+docker events --since 10m
+```
+
+Check the container exit code and health status:
+
+```bash
+docker inspect --format '{{.State.Status}} exit={{.State.ExitCode}} health={{if .State.Health}}{{.State.Health.Status}}{{end}}' <container>
+```
+
+## Official references
+
+- [Docker command-line reference](https://docs.docker.com/reference/cli/docker/)
+- [Docker Compose command-line reference](https://docs.docker.com/reference/cli/docker/compose/)
+- [docker compose down](https://docs.docker.com/reference/cli/docker/compose/down/)

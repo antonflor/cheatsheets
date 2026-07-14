@@ -1,0 +1,100 @@
+name: Documentation quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate maintained Markdown structure
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          files = [
+              "README.md",
+              "CONTRIBUTING.md",
+              "STYLE_GUIDE.md",
+              "arista.md",
+              "azure.md",
+              "cisco.md",
+              "docker.md",
+              "gcloud.md",
+              "iptables.md",
+              "kubernetes.md",
+              "rest-api.md",
+              "terraform.md",
+          ]
+
+          errors = []
+          for filename in files:
+              path = Path(filename)
+              if not path.is_file():
+                  errors.append(f"{filename}: file is missing")
+                  continue
+
+              text = path.read_text(encoding="utf-8")
+              if not text.strip():
+                  errors.append(f"{filename}: file is empty")
+                  continue
+
+              first_content_line = next(
+                  (line for line in text.splitlines() if line.strip()),
+                  "",
+              )
+              if not first_content_line.startswith("# "):
+                  errors.append(f"{filename}: first content line must be an H1")
+              if "\x00" in text:
+                  errors.append(f"{filename}: NUL byte found")
+
+              for number, line in enumerate(text.splitlines(), start=1):
+                  if re.search(r"\[[^\]]*\]\(\s*\)", line):
+                      errors.append(f"{filename}:{number}: empty Markdown link")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+
+          print(f"Validated {len(files)} maintained Markdown files.")
+          PY
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check maintained documentation links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --offline
+            --verbose
+            --no-progress
+            README.md
+            CONTRIBUTING.md
+            STYLE_GUIDE.md
+            arista.md
+            azure.md
+            cisco.md
+            docker.md
+            gcloud.md
+            iptables.md
+            kubernetes.md
+            rest-api.md
+            terraform.md
+          fail: true
