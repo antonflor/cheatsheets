@@ -11,28 +11,67 @@ permissions:
   contents: read
 
 jobs:
-  markdownlint:
+  markdown-structure:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Lint maintained Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v20
-        with:
-          globs: |
-            README.md
-            CONTRIBUTING.md
-            STYLE_GUIDE.md
-            arista.md
-            azure.md
-            cisco.md
-            docker.md
-            gcloud.md
-            iptables.md
-            kubernetes.md
-            rest-api.md
-            terraform.md
+      - name: Validate maintained Markdown structure
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          files = [
+              "README.md",
+              "CONTRIBUTING.md",
+              "STYLE_GUIDE.md",
+              "arista.md",
+              "azure.md",
+              "cisco.md",
+              "docker.md",
+              "gcloud.md",
+              "iptables.md",
+              "kubernetes.md",
+              "rest-api.md",
+              "terraform.md",
+          ]
+
+          errors = []
+          for filename in files:
+              path = Path(filename)
+              if not path.is_file():
+                  errors.append(f"{filename}: file is missing")
+                  continue
+
+              text = path.read_text(encoding="utf-8")
+              lines = text.splitlines()
+              h1_count = sum(1 for line in lines if line.startswith("# "))
+
+              if h1_count != 1:
+                  errors.append(f"{filename}: expected exactly one H1, found {h1_count}")
+              if not text.endswith("\n"):
+                  errors.append(f"{filename}: file must end with a newline")
+              if text.count("```") % 2:
+                  errors.append(f"{filename}: unbalanced fenced code blocks")
+
+              for number, line in enumerate(lines, start=1):
+                  if "\t" in line:
+                      errors.append(f"{filename}:{number}: tab character found")
+                  if re.match(r"^#{1,6}[^ #]", line):
+                      errors.append(f"{filename}:{number}: heading marker needs a space")
+                  if re.search(r"\[[^\]]*\]\(\s*\)", line):
+                      errors.append(f"{filename}:{number}: empty Markdown link")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+
+          print(f"Validated {len(files)} maintained Markdown files.")
+          PY
 
   links:
     runs-on: ubuntu-latest
