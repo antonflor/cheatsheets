@@ -1,190 +1,186 @@
-# Arista Command Cheat Sheet
-
-This cheat sheet compiles a range of commands specifically for network engineers working with Arista switches. It covers various aspects of network troubleshooting and configuration, including OSPF, Layer 2 issues, and general device management.
-
-Intended as a quick reference guide, this document aims to streamline the process of managing Arista network environments and to assist in efficient problem-solving. Remember to apply these commands judiciously, as they can have a substantial impact on network performance and stability.
-
-
-## BGP (Border Gateway Protocol) Management
-
-- **show ip bgp**
-  - Shows the BGP routing table.
-
-- **show ip bgp summary**
-  - Provides a summary of BGP neighbor relationships.
-
-- **show ip bgp neighbors**
-  - Displays detailed information about BGP neighbors.
-
-- **router bgp [AS_NUMBER]**
-  - Configures BGP with a specific Autonomous System (AS) number.
-
-- **neighbor [IP_ADDRESS] remote-as [AS_NUMBER]**
-  - Configures a BGP neighbor.
-
-- **network [IP_ADDRESS] mask [NETMASK]**
-  - Advertises a network in BGP.
-
-- **show ip bgp neighbors [IP_ADDRESS] advertised-routes**
-  - Displays the routes advertised to a specific BGP neighbor.
-
-- **show ip bgp neighbors [IP_ADDRESS] received-routes**
-  - Shows routes received from a specific BGP neighbor.
-
-- **show ip bgp regexp [REGEXP]**
-  - Displays routes matching a specific regular expression in BGP.
-
-- **clear ip bgp [IP_ADDRESS]**
-  - Clears a specific BGP session.
-
-- **show ip bgp community [COMMUNITY]**
-  - Displays routes with a specific BGP community tag.
-
-- **show ip bgp dampening parameters**
-  - Displays the BGP route dampening parameters.
-
-- **show ip bgp filter-list [LIST_NUMBER]**
-  - Shows routes that match a specific BGP filter list.
-
-- **show ip bgp flap-statistics**
-  - Displays BGP flap statistics.
-
-- **show ip bgp paths**
-  - Shows path information for BGP routes.
-
-- **show ip bgp policy**
-  - Displays the BGP policy information.
-
-- **show ip bgp route-map [MAP_NAME]**
-  - Shows routes that match a specific route-map in BGP.
-
-- **show ip bgp summary longer-prefixes**
-  - Displays a summary of BGP with longer prefixes.
-
-- **show ip bgp update-group**
-  - Shows BGP update group information.
-
-- **show running-config bgp**
-  - Displays the current BGP configuration.
-
-## VRRP (Virtual Router Redundancy Protocol)
-
-- **show vrrp**
-  - Displays VRRP configurations and status.
-
-- **show running-config vrrp**
-  - Displays the running configuration specific to VRRP.
-
-- **vrrp [GROUP_ID] ip [IP_ADDRESS]**
-  - Configures a VRRP group with an IP address.
-
-- **vrrp [GROUP_ID] priority [PRIORITY_LEVEL]**
-  - Sets the priority for a VRRP group.
-
-- **vrrp [GROUP_ID] preempt**
-  - Enables preemption in a VRRP group.
-
-- **show vrrp brief**
-  - Provides a brief overview of VRRP status.
-
-- **show vrrp detail**
-  - Displays detailed VRRP information.
-
-## VLAN and Interface Configuration
-
-- **show interfaces Vlan [VLAN_ID]**
-  - Shows configuration and status of a specific VLAN interface.
-
-- **vlan [VLAN_ID]**
-  - Creates a VLAN or enters VLAN configuration mode.
-
-- **interface Vlan [VLAN_ID]**
-  - Enters configuration mode for a specific VLAN interface.
-
-- **show vlan**
-  - Displays VLAN information and status.
-
-- **show interfaces trunk**
-  - Shows trunk interface status and configurations.
-
-- **spanning-tree vlan [VLAN_ID] priority [PRIORITY]**
-  - Sets the spanning-tree priority for a VLAN.
-
-- **show spanning-tree detail**
-  - Displays detailed spanning-tree information.
-
-## OSPF (Open Shortest Path First)
-
-- **show ip ospf neighbor**
-  - Displays OSPF neighbor relationships and states.
-
-- **show ip ospf interface**
-  - Shows OSPF-related information on interfaces.
-
-- **show ip ospf database**
-  - Displays the OSPF link-state database (LSDB).
-
-- **show ip route ospf**
-  - Shows routes learned via OSPF.
-
-- **show ip ospf traffic**
-  - Displays OSPF traffic statistics.
-
-- **show ip ospf border-routers**
-  - Shows OSPF border routers in the network.
-
-- **show ip ospf virtual-links**
-  - Displays OSPF virtual link configurations.
-
-- **debug ip ospf events**
-  - Enables OSPF event debugging for more granular troubleshooting.
-
-## General Network Management
-
-- **configure terminal**
-  - Enters global configuration mode.
-
-- **show ip route vrf [VRF_NAME]**
-  - Shows the IP routing table for a specific VRF.
-
-- **show vrf**
-  - Displays VRF configurations and status.
-
-- **ip route [DESTINATION] [MASK] [NEXT_HOP_IP]**
-  - Configures a static route.
-
-- **show ip interface brief**
-  - Summarizes the status and configuration of all IP interfaces.
-
-- **show interfaces description**
-  - Displays interface descriptions and status.
-
-- **show interfaces status**
-  - Shows the link status of all interfaces.
-
-- **show interfaces counters errors**
-  - Displays interface error counters.
-
-- **show interfaces counters rate**
-  - Shows the rate of traffic on interfaces.
-
-- **write memory**
-  - Saves the current configuration to the startup configuration file.
-
-- **show logging**
-  - Displays the system log for potential error messages or alerts.
-
-- **show mlag detail**
-  - Provides detailed information on MLAG status.
-
-- **show mac address-table**
-  - Shows the MAC address table.
-
-- **show etherchannel summary**
-  - Provides a summary of EtherChannel status.
-
-- **show ip arp**
-  - Shows the ARP table, useful for resolving IP to MAC address mappings.
-
-- **show lldp neighbors**
-  - Displays LLDP neighbor information, useful for verifying network topology.
+# Arista EOS Cheat Sheet
+
+> **Applies to:** Common Arista EOS data-center switching workflows
+> **Last reviewed:** 2026-07-14
+
+Command availability varies by EOS release and hardware platform. This sheet uses Arista terminology such as port-channel and MLAG rather than Cisco EtherChannel commands.
+
+## Safety
+
+> [!WARNING]
+> Clearing routing sessions, changing MLAG peer links, modifying trunks, or enabling debug output can interrupt production traffic. Capture state and validate a rollback plan first.
+
+## System state
+
+```text
+show version
+show inventory
+show hostname
+show running-config
+show startup-config
+show logging last 100
+show clock
+show processes top once
+show environment all
+show reload cause
+show extensions
+```
+
+## Interfaces
+
+```text
+show interfaces status
+show interfaces description
+show ip interface brief
+show interfaces <interface>
+show interfaces <interface> counters errors
+show interfaces counters errors
+show interfaces counters rates
+show running-config interfaces <interface>
+show transceiver <interface> detail
+```
+
+## VLANs and trunks
+
+```text
+show vlan
+show vlan <vlan-id>
+show interfaces trunk
+show interfaces <interface> switchport
+show spanning-tree
+show spanning-tree vlan <vlan-id>
+show spanning-tree inconsistentports
+```
+
+Example access port:
+
+```text
+interface <interface>
+   description <description>
+   switchport mode access
+   switchport access vlan <vlan-id>
+   spanning-tree portfast
+```
+
+Example trunk:
+
+```text
+interface <interface>
+   description <description>
+   switchport mode trunk
+   switchport trunk allowed vlan <vlan-list>
+```
+
+## Port-channels and LACP
+
+```text
+show port-channel summary
+show port-channel dense
+show lacp neighbor
+show lacp counters all-ports
+show interfaces Port-Channel<number>
+```
+
+Example LACP member:
+
+```text
+interface <interface>
+   channel-group <number> mode active
+```
+
+## MLAG
+
+```text
+show mlag
+show mlag detail
+show mlag interfaces
+show mlag config-sanity
+show mlag issu warnings
+show interfaces Port-Channel<peer-link-number>
+show interfaces Vlan<peer-vlan-id>
+```
+
+Check these before changing MLAG:
+
+- peer-link state and member consistency;
+- peer-address reachability;
+- reload-delay and dual-primary settings;
+- VLAN consistency across peers;
+- orphaned ports and single-homed dependencies.
+
+## BGP
+
+```text
+show ip bgp summary
+show bgp ipv4 unicast summary
+show ip bgp neighbors <neighbor-address>
+show ip bgp <prefix>
+show ip bgp neighbors <neighbor-address> advertised-routes
+show ip bgp neighbors <neighbor-address> received-routes
+show ip route bgp
+show running-config section router bgp
+```
+
+Prefer a soft inbound or outbound refresh when policy permits rather than resetting the TCP session:
+
+```text
+clear ip bgp <neighbor-address> soft in
+clear ip bgp <neighbor-address> soft out
+```
+
+## OSPF
+
+```text
+show ip ospf
+show ip ospf neighbor
+show ip ospf interface
+show ip ospf database
+show ip route ospf
+```
+
+## Routing, VRFs, MAC, and ARP
+
+```text
+show ip route
+show ip route <prefix>
+show vrf
+show ip route vrf <vrf-name>
+show mac address-table
+show mac address-table interface <interface>
+show ip arp
+show ip arp vrf <vrf-name>
+show lldp neighbors detail
+```
+
+## Configuration sessions and rollback
+
+Use a configuration session for changes that benefit from an explicit diff:
+
+```text
+configure session <session-name>
+show session-config diffs
+commit
+```
+
+Save a validated running configuration:
+
+```text
+copy running-config startup-config
+```
+
+Confirm the exact session and rollback behavior for the deployed EOS release before relying on it during remote maintenance.
+
+## Troubleshooting workflow
+
+1. Verify system health and timestamps.
+2. Check interface state, optics, errors, and rates.
+3. Validate VLAN, trunk, spanning-tree, and port-channel consistency.
+4. For dual-homed services, check MLAG state and config sanity.
+5. Confirm MAC, ARP, VRF, and route resolution.
+6. Inspect routing-protocol neighbors and policy.
+7. Make the smallest reversible change and verify both peers afterward.
+
+## Official references
+
+- [Arista EOS documentation](https://www.arista.com/en/support/product-documentation)
+- [Arista EOS Central](https://www.arista.com/en/support/toi/eos)
