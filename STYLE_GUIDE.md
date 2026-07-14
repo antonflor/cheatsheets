@@ -75,7 +75,7 @@ Guidelines:
 - Link visual guides to the detailed operational reference containing commands and cautions.
 - Prefer one focused diagram over a large all-in-one architecture drawing.
 
-The repository-wide diagrams live in [visual-guides.md](visual-guides.md). Topic files may embed a diagram directly when it is essential to understanding that specific page.
+The repository-wide diagrams live in [visual-guides.md](visual-guides.md). Command-heavy cloud and utility sheets remain text-first unless a topology or lifecycle diagram adds clear operational value. Topic files may embed a diagram directly when it is essential to understanding that specific page.
 
 ## Troubleshooting order
 
