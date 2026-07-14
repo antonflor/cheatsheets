@@ -84,7 +84,7 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 
 | Topic | Reference |
 |---|---|
-| Git | [git.md](git.md) |
+| Git | [github.md](github.md) |
 | Kafka | [kafka.md](kafka.md) |
 | REST APIs | [rest-api.md](rest-api.md) |
 | SQL | [sql.md](sql.md) |
