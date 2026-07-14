@@ -4,6 +4,28 @@
 
 Each file should help an engineer answer a specific operational question quickly. Prefer commands, decision points, expected output, and cautions over broad product descriptions.
 
+## Filename conventions
+
+Use descriptive lowercase kebab-case filenames:
+
+```text
+google-cloud.md
+leaf-spine.md
+spanning-tree.md
+```
+
+Rules:
+
+- Use the product or protocol name an engineer is likely to search for.
+- Separate words with hyphens, not underscores or compressed spellings.
+- Avoid filenames that are broader or narrower than the actual content.
+- Do not name a Git reference `github.md` unless the document is specifically about GitHub rather than Git.
+- Combine a platform overview and its primary CLI when they serve the same audience and would otherwise repeat concepts.
+- Keep separate files when tools have different lifecycles, safety models, or operational workflows, such as Terraform and Pulumi.
+- Avoid renaming stable single-word files only for cosmetic consistency.
+
+When renaming or merging files, update the README, cross-references, and documentation-quality workflow in the same change.
+
 ## Required metadata for maintained sheets
 
 Place these lines immediately below the title:
@@ -27,6 +49,33 @@ kubectl get pods --namespace <namespace>
 Do not use realistic credentials, public IP addresses belonging to third parties, internal hostnames, or customer-specific identifiers.
 
 For state-changing commands, show a read-only verification command first and add an inline warning when the operation is destructive.
+
+## Visual diagrams
+
+Use Mermaid when a diagram explains relationships that are harder to understand as a flat list. Good candidates include:
+
+- physical or logical topology;
+- packet, request, or control-plane paths;
+- state transitions;
+- deployment and infrastructure lifecycles;
+- decision trees;
+- failure domains;
+- ordered boot or troubleshooting sequences.
+
+Do not add a diagram merely to repeat a command list, glossary, or short numbered procedure. A diagram should make a specific concept faster to understand.
+
+Guidelines:
+
+- Keep diagrams conceptual unless the document is explicitly vendor-specific.
+- Use labels that remain readable in both GitHub light and dark themes.
+- Avoid custom colors and styling unless they convey essential meaning.
+- Keep node and edge counts low enough to read without zooming.
+- Add a short explanation before or after each diagram.
+- State important simplifications and do not imply that one diagram represents every vendor or failure case.
+- Link visual guides to the detailed operational reference containing commands and cautions.
+- Prefer one focused diagram over a large all-in-one architecture drawing.
+
+The repository-wide diagrams live in [visual-guides.md](visual-guides.md). Command-heavy cloud and utility sheets remain text-first unless a topology or lifecycle diagram adds clear operational value. Topic files may embed a diagram directly when it is essential to understanding that specific page.
 
 ## Troubleshooting order
 

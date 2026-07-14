@@ -11,17 +11,32 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 - Start with read-only inspection commands and capture the current state.
 - Treat `clear`, `delete`, `destroy`, `flush`, `reset`, `prune`, and `--force` operations as destructive.
 - Prefer official documentation for release-specific behavior.
+- Use [visual-guides.md](visual-guides.md) for topology, lifecycle, state-transition, and troubleshooting diagrams.
 - Open a content-correction issue when a command is obsolete, unsafe, ambiguous, or vendor-specific.
+
+## Visual guides
+
+The diagrams are intentionally limited to concepts where visual relationships improve understanding; command-oriented references remain text-first.
+
+| Concept | Visual reference | Detailed reference |
+|---|---|---|
+| Spanning-tree root and alternate path | [Visual guide](visual-guides.md#spanning-tree-root-and-alternate-path) | [spanning-tree.md](spanning-tree.md) |
+| Leaf-spine topology | [Visual guide](visual-guides.md#leaf-spine-fabric) | [leaf-spine.md](leaf-spine.md) |
+| Pulumi change lifecycle | [Visual guide](visual-guides.md#pulumi-change-lifecycle) | [pulumi.md](pulumi.md) |
+| Linux boot sequence | [Visual guide](visual-guides.md#linux-boot-sequence) | [linux-boot.md](linux-boot.md) |
+| Git branch and pull-request workflow | [Visual guide](visual-guides.md#git-branch-and-pull-request-workflow) | [git.md](git.md) |
+| Operational troubleshooting sequence | [Visual guide](visual-guides.md#operational-troubleshooting-sequence) | [STYLE_GUIDE.md](STYLE_GUIDE.md) |
 
 ## Networking fundamentals
 
 | Topic | Reference |
 |---|---|
 | Clos fabrics | [clos.md](clos.md) |
-| Leaf-spine design | [leafspine.md](leafspine.md) |
+| Leaf-spine design | [leaf-spine.md](leaf-spine.md) |
 | LLDP | [lldp.md](lldp.md) |
 | OSI model | [osi.md](osi.md) |
 | OSPF | [ospf.md](ospf.md) |
+| Spanning Tree Protocol | [spanning-tree.md](spanning-tree.md) |
 | TCP | [tcp.md](tcp.md) |
 | UDP | [udp.md](udp.md) |
 
@@ -45,13 +60,11 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 
 ## Cloud platforms
 
-| Topic | Reference |
+| Platform | Reference |
 |---|---|
-| AWS services | [awscloud.md](awscloud.md) |
-| AWS CLI | [awscli.md](awscli.md) |
+| Amazon Web Services and AWS CLI | [aws.md](aws.md) |
 | Microsoft Azure and Azure CLI | [azure.md](azure.md) |
-| Google Cloud services | [gcpcloud.md](gcpcloud.md) |
-| Google Cloud CLI | [gcloud.md](gcloud.md) |
+| Google Cloud and Google Cloud CLI | [google-cloud.md](google-cloud.md) |
 
 ## Containers, orchestration, and infrastructure as code
 
@@ -59,6 +72,7 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 |---|---|
 | Docker and Docker Compose | [docker.md](docker.md) |
 | Kubernetes and kubectl | [kubernetes.md](kubernetes.md) |
+| Pulumi | [pulumi.md](pulumi.md) |
 | Terraform | [terraform.md](terraform.md) |
 | Jenkins CI/CD | [jenkins-cicd.md](jenkins-cicd.md) |
 | Puppet | [puppet.md](puppet.md) |
@@ -71,7 +85,7 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 | Debian | [debian.md](debian.md) |
 | HAProxy | [haproxy.md](haproxy.md) |
 | iptables | [iptables.md](iptables.md) |
-| Linux boot process | [linux_kernel_boot.md](linux_kernel_boot.md) |
+| Linux boot and kernel | [linux-boot.md](linux-boot.md) |
 | nmap | [nmap.md](nmap.md) |
 | Pacemaker | [pacemaker.md](pacemaker.md) |
 | Corosync | [corosync.md](corosync.md) |
@@ -84,10 +98,14 @@ Practical quick-reference notes for network engineering, Linux operations, cloud
 
 | Topic | Reference |
 |---|---|
-| Git | [github.md](github.md) |
+| Git | [git.md](git.md) |
 | Kafka | [kafka.md](kafka.md) |
 | REST APIs | [rest-api.md](rest-api.md) |
 | SQL | [sql.md](sql.md) |
+
+## Filename conventions
+
+New and renamed sheets use descriptive lowercase kebab-case names, such as `google-cloud.md`, `leaf-spine.md`, and `spanning-tree.md`. A platform overview and its primary CLI belong in one file when they serve the same operational audience.
 
 ## Maintenance policy
 
