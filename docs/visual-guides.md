@@ -1,15 +1,15 @@
 # Infrastructure Visual Guides
 
 > **Applies to:** General infrastructure and network engineering concepts
-> **Last reviewed:** 2026-07-14
+> **Last reviewed:** 2026-07-18
 
-These Mermaid diagrams supplement the detailed cheat sheets with quick topology, lifecycle, and troubleshooting views. They are intentionally conceptual: use the linked reference pages for commands, platform differences, safety warnings, and implementation details.
+These Mermaid diagrams supplement the detailed references with quick topology, lifecycle, and troubleshooting views. They are intentionally conceptual: use the linked pages for commands, platform differences, safety warnings, and implementation details.
 
 The collection is deliberately limited to concepts where visual relationships improve comprehension. Command-oriented cloud, CLI, and utility references remain text-first rather than receiving decorative diagrams.
 
 ## Spanning tree: root and alternate path
 
-Related reference: [spanning-tree.md](spanning-tree.md)
+Related reference: [networking/spanning-tree.md](networking/spanning-tree.md)
 
 In a redundant Layer 2 triangle, spanning tree elects a root bridge and keeps one redundant path from forwarding. The alternate path can transition to forwarding after a topology failure.
 
@@ -32,7 +32,7 @@ The exact blocked side depends on root-path cost and bridge or port tie-breakers
 
 ## Leaf-spine fabric
 
-Related reference: [leaf-spine.md](leaf-spine.md)
+Related reference: [networking/leaf-spine.md](networking/leaf-spine.md)
 
 Every leaf connects to every spine. Traffic between endpoints on different leaves normally uses one spine hop, providing predictable path length and multiple equal-cost routes.
 
@@ -65,7 +65,7 @@ A healthy routed fabric normally loses capacity rather than reachability when on
 
 ## Pulumi change lifecycle
 
-Related reference: [pulumi.md](pulumi.md)
+Related reference: [automation/pulumi.md](automation/pulumi.md)
 
 Pulumi evaluates program code and stack configuration, previews the proposed change, applies approved changes through provider APIs, and records resource state in the selected backend.
 
@@ -99,7 +99,7 @@ A preview is not a substitute for validating the selected stack, cloud identity,
 
 ## Linux boot sequence
 
-Related reference: [linux-boot.md](linux-boot.md)
+Related reference: [linux/linux-boot.md](linux/linux-boot.md)
 
 The boot process moves from firmware into the bootloader, kernel, early userspace, PID 1, and finally normal services and login targets.
 
@@ -129,7 +129,7 @@ A failure should be investigated at the earliest incomplete stage: firmware entr
 
 ## Git branch and pull-request workflow
 
-Related reference: [git.md](git.md)
+Related reference: [development/git.md](development/git.md)
 
 A small branch-based workflow keeps changes isolated, reviewable, and recoverable before they reach the shared default branch.
 
@@ -162,9 +162,9 @@ Use `git status`, staged and unstaged diffs, and a backup branch before destruct
 
 ## Operational troubleshooting sequence
 
-Related guidance: [STYLE_GUIDE.md](STYLE_GUIDE.md)
+Related guidance: [../STYLE_GUIDE.md](../STYLE_GUIDE.md)
 
-This sequence is reusable across network, Linux, cloud, and infrastructure-as-code troubleshooting.
+This sequence is reusable across network, Linux, cloud, and infrastructure-automation troubleshooting.
 
 ```mermaid
 flowchart TD

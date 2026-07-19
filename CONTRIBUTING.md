@@ -10,6 +10,46 @@ Corrections and focused additions are welcome. The goal is operationally useful,
 4. Mark destructive commands clearly and include a safer inspection step first.
 5. Never commit real credentials, internal addresses, customer data, private architecture, or employer-specific interview material.
 
+## Choose the correct location
+
+Reference sheets belong under a shallow domain directory:
+
+```text
+docs/<domain>/<topic>.md
+```
+
+Current domains are:
+
+- `networking`
+- `network-platforms`
+- `cisco-contact-center`
+- `cloud`
+- `containers`
+- `automation`
+- `linux`
+- `high-availability`
+- `development`
+
+Use the closest existing domain instead of creating a one-file directory. Add a new domain only when multiple related references justify it. Keep `README.md`, `CONTRIBUTING.md`, `STYLE_GUIDE.md`, and `LICENSE` at the repository root.
+
+## Name the file intentionally
+
+Use the canonical name engineers are likely to search for:
+
+- common, unambiguous protocol acronyms: `tcp.md`, `udp.md`, `ospf.md`, `lldp.md`;
+- descriptive names for ambiguous concepts: `spanning-tree.md`, `osi-model.md`;
+- actual platform names: `arista-eos.md`, `cisco-ios.md`, `fortigate.md`, `junos.md`;
+- concise product acronyms inside an already specific folder: `docs/cisco-contact-center/cvp.md`.
+
+Do not rename files solely to make everything an acronym or solely to spell everything out. Optimize for clarity, searchability, and domain context.
+
+When adding, moving, or renaming a sheet:
+
+1. update the root README index;
+2. update all relative cross-references;
+3. keep the hierarchy shallow;
+4. ensure documentation-quality checks pass.
+
 ## Cheat-sheet structure
 
 Use the following order when it fits the topic:
@@ -38,6 +78,14 @@ A read-only, least-disruptive-first sequence.
 
 - [Documentation title](https://example.com)
 ```
+
+When inherited content has only received a structural cleanup and has not been technically revalidated, use:
+
+```markdown
+> **Status:** Legacy reference — technical validation pending
+```
+
+Do not assign a fresh review date to unvalidated content.
 
 ## Style rules
 

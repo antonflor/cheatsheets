@@ -4,31 +4,82 @@
 
 Each file should help an engineer answer a specific operational question quickly. Prefer commands, decision points, expected output, and cautions over broad product descriptions.
 
-## Filename conventions
+## Repository and folder conventions
 
-Use descriptive lowercase kebab-case filenames:
+Reference sheets live under a shallow domain hierarchy:
 
 ```text
-google-cloud.md
-leaf-spine.md
-spanning-tree.md
+docs/<domain>/<topic>.md
 ```
 
-Rules:
+Keep project-level documentation and repository metadata at the root. Do not place ordinary reference sheets beside `README.md`.
 
-- Use the product or protocol name an engineer is likely to search for.
+Folder rules:
+
+- Use an existing domain whenever it reasonably fits.
+- Keep the hierarchy to `docs/<domain>/<file>`; avoid deeper nesting.
+- Do not create a directory for a single vendor, command, or page unless multiple related references justify it.
+- Keep closely coupled technologies together, such as Pacemaker and Corosync.
+- Separate distinct operational domains, such as containers and automation.
+- Update the README, cross-references, and CI rules in the same change when restructuring files.
+
+## Filename conventions
+
+Use descriptive lowercase kebab-case filenames. Choose the canonical name engineers are most likely to search for.
+
+### Protocols and standards
+
+Use a well-known acronym when it is canonical and unambiguous:
+
+```text
+lldp.md
+ospf.md
+tcp.md
+udp.md
+```
+
+Use a descriptive name when the acronym is ambiguous or the qualifier is part of the concept:
+
+```text
+osi-model.md
+spanning-tree.md
+leaf-spine.md
+```
+
+Do not mechanically append redundant suffixes such as `-protocol` when the subject is already clear. `spanning-tree.md` is preferred over both `stp.md` and `spanning-tree-protocol.md` because it is searchable and avoids ambiguity with shielded twisted pair.
+
+### Vendors and products
+
+Name the actual platform or product, not merely the company:
+
+```text
+arista-eos.md
+cisco-ios.md
+fortigate.md
+junos.md
+google-cloud.md
+```
+
+Within a domain-specific folder, omit redundant prefixes when the acronym is the normal product name:
+
+```text
+docs/cisco-contact-center/cuic.md
+docs/cisco-contact-center/cvp.md
+docs/cisco-contact-center/icm.md
+```
+
+### General rules
+
 - Separate words with hyphens, not underscores or compressed spellings.
-- Avoid filenames that are broader or narrower than the actual content.
-- Do not name a Git reference `github.md` unless the document is specifically about GitHub rather than Git.
+- Avoid filenames broader or narrower than the actual content.
 - Combine a platform overview and its primary CLI when they serve the same audience and would otherwise repeat concepts.
 - Keep separate files when tools have different lifecycles, safety models, or operational workflows, such as Terraform and Pulumi.
-- Avoid renaming stable single-word files only for cosmetic consistency.
+- Avoid renaming stable single-word files solely for cosmetic consistency.
+- When renaming or merging files, update the README, relative links, and documentation-quality checks in the same change.
 
-When renaming or merging files, update the README, cross-references, and documentation-quality workflow in the same change.
+## Required status metadata
 
-## Required metadata for maintained sheets
-
-Place these lines immediately below the title:
+New or technically revalidated sheets must place these lines immediately below the title:
 
 ```markdown
 > **Applies to:** Product family or major release
@@ -36,6 +87,14 @@ Place these lines immediately below the title:
 ```
 
 Use `General concepts` when the material is standards-based rather than tied to one implementation.
+
+An older page that has only been structurally cleaned up must not receive a false review date. Mark it clearly instead:
+
+```markdown
+> **Status:** Legacy reference — technical validation pending
+```
+
+Do not add new unvalidated legacy pages. The legacy status exists only to make inherited content honest while it is being replaced or reviewed.
 
 ## Command presentation
 
@@ -75,7 +134,7 @@ Guidelines:
 - Link visual guides to the detailed operational reference containing commands and cautions.
 - Prefer one focused diagram over a large all-in-one architecture drawing.
 
-The repository-wide diagrams live in [visual-guides.md](visual-guides.md). Command-heavy cloud and utility sheets remain text-first unless a topology or lifecycle diagram adds clear operational value. Topic files may embed a diagram directly when it is essential to understanding that specific page.
+The repository-wide diagrams live in [`docs/visual-guides.md`](docs/visual-guides.md). Command-heavy cloud and utility sheets remain text-first unless a topology or lifecycle diagram adds clear operational value. Topic files may embed a diagram directly when it is essential to understanding that specific page.
 
 ## Troubleshooting order
 
