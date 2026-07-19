@@ -37,6 +37,7 @@ jobs:
               "cisco-contact-center",
               "cloud",
               "containers",
+              "kubernetes-platforms",
               "automation",
               "linux",
               "high-availability",

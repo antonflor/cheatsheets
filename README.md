@@ -1,6 +1,6 @@
 # Infrastructure Reference
 
-Practical quick-reference notes for network engineering, Linux operations, cloud platforms, infrastructure automation, and troubleshooting.
+Practical quick-reference notes for network engineering, Linux operations, cloud platforms, Kubernetes platforms, infrastructure automation, and troubleshooting.
 
 > [!WARNING]
 > These notes are a memory aid, not a substitute for vendor documentation, change review, backups, or a tested rollback plan. Commands that alter state can cause outages or data loss. Validate syntax against the exact software and platform release you operate.
@@ -24,6 +24,8 @@ The diagrams are intentionally limited to concepts where visual relationships im
 | Spanning-tree root and alternate path | [Visual guide](docs/visual-guides.md#spanning-tree-root-and-alternate-path) | [Spanning Tree](docs/networking/spanning-tree.md) |
 | Leaf-spine topology | [Visual guide](docs/visual-guides.md#leaf-spine-fabric) | [Leaf-spine design](docs/networking/leaf-spine.md) |
 | Pulumi change lifecycle | [Visual guide](docs/visual-guides.md#pulumi-change-lifecycle) | [Pulumi](docs/automation/pulumi.md) |
+| Talos and Omni management boundary | [Visual guide](docs/visual-guides.md#talos-and-omni-management-boundary) | [Talos Linux](docs/kubernetes-platforms/talos-linux.md) and [Omni](docs/kubernetes-platforms/omni.md) |
+| Omni machine-to-cluster lifecycle | [Visual guide](docs/visual-guides.md#omni-machine-to-cluster-lifecycle) | [Omni](docs/kubernetes-platforms/omni.md) |
 | Linux boot sequence | [Visual guide](docs/visual-guides.md#linux-boot-sequence) | [Linux boot and kernel](docs/linux/linux-boot.md) |
 | Git branch and pull-request workflow | [Visual guide](docs/visual-guides.md#git-branch-and-pull-request-workflow) | [Git](docs/development/git.md) |
 | Spec-driven development lifecycle | [Visual guide](docs/visual-guides.md#spec-driven-development-lifecycle) | [Spec-driven development](docs/development/spec-driven-development.md) |
@@ -74,6 +76,13 @@ The diagrams are intentionally limited to concepts where visual relationships im
 |---|---|
 | Docker and Docker Compose | [docs/containers/docker.md](docs/containers/docker.md) |
 | Kubernetes and kubectl | [docs/containers/kubernetes.md](docs/containers/kubernetes.md) |
+
+## Kubernetes platforms
+
+| Platform | Reference |
+|---|---|
+| Talos Linux | [docs/kubernetes-platforms/talos-linux.md](docs/kubernetes-platforms/talos-linux.md) |
+| Sidero Labs Omni | [docs/kubernetes-platforms/omni.md](docs/kubernetes-platforms/omni.md) |
 
 ## Infrastructure automation
 
