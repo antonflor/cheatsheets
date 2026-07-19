@@ -160,6 +160,45 @@ flowchart LR
 
 Use `git status`, staged and unstaged diffs, and a backup branch before destructive history repair.
 
+## Spec-driven development lifecycle
+
+Related reference: [development/spec-driven-development.md](development/spec-driven-development.md)
+
+Spec-driven development separates expected behavior from technical design, breaks the design into verifiable tasks, and checks the completed implementation against the original acceptance criteria.
+
+```mermaid
+flowchart LR
+    Idea["Problem or feature idea"]
+    Spec["Specification<br/>what and why"]
+    Clarify{"Requirements clear<br/>and testable?"}
+    Refine["Clarify scope, constraints,<br/>and edge cases"]
+    Plan["Technical plan<br/>how"]
+    Tasks["Ordered tasks"]
+    Implement["Implement one task"]
+    Validate{"Tests and acceptance<br/>criteria pass?"}
+    Correct["Correct code, plan,<br/>or specification"]
+    Review["Pull request and review"]
+    Deploy["Merge, deploy,<br/>and verify"]
+    Learn["Operational feedback<br/>and new requirements"]
+
+    Idea --> Spec
+    Spec --> Clarify
+    Clarify -->|No| Refine
+    Refine --> Spec
+    Clarify -->|Yes| Plan
+    Plan --> Tasks
+    Tasks --> Implement
+    Implement --> Validate
+    Validate -->|No| Correct
+    Correct --> Implement
+    Validate -->|Yes| Review
+    Review --> Deploy
+    Deploy --> Learn
+    Learn --> Spec
+```
+
+The diagram is conceptual. A small low-risk change may combine stages, while a production or regulated change may require additional security, architecture, migration, and approval gates.
+
 ## Operational troubleshooting sequence
 
 Related guidance: [../STYLE_GUIDE.md](../STYLE_GUIDE.md)

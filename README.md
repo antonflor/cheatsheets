@@ -26,6 +26,7 @@ The diagrams are intentionally limited to concepts where visual relationships im
 | Pulumi change lifecycle | [Visual guide](docs/visual-guides.md#pulumi-change-lifecycle) | [Pulumi](docs/automation/pulumi.md) |
 | Linux boot sequence | [Visual guide](docs/visual-guides.md#linux-boot-sequence) | [Linux boot and kernel](docs/linux/linux-boot.md) |
 | Git branch and pull-request workflow | [Visual guide](docs/visual-guides.md#git-branch-and-pull-request-workflow) | [Git](docs/development/git.md) |
+| Spec-driven development lifecycle | [Visual guide](docs/visual-guides.md#spec-driven-development-lifecycle) | [Spec-driven development](docs/development/spec-driven-development.md) |
 | Operational troubleshooting sequence | [Visual guide](docs/visual-guides.md#operational-troubleshooting-sequence) | [Documentation style guide](STYLE_GUIDE.md) |
 
 ## Networking fundamentals
@@ -110,6 +111,7 @@ The diagrams are intentionally limited to concepts where visual relationships im
 | Topic | Reference |
 |---|---|
 | Git | [docs/development/git.md](docs/development/git.md) |
+| Spec-driven development | [docs/development/spec-driven-development.md](docs/development/spec-driven-development.md) |
 | Kafka | [docs/development/kafka.md](docs/development/kafka.md) |
 | REST APIs | [docs/development/rest-api.md](docs/development/rest-api.md) |
 | SQL | [docs/development/sql.md](docs/development/sql.md) |
