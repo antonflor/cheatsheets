@@ -25,6 +25,7 @@ The diagrams are intentionally limited to concepts where visual relationships im
 | Pulumi change lifecycle | [Visual guide](visual-guides.md#pulumi-change-lifecycle) | [pulumi.md](pulumi.md) |
 | Linux boot sequence | [Visual guide](visual-guides.md#linux-boot-sequence) | [linux-boot.md](linux-boot.md) |
 | Git branch and pull-request workflow | [Visual guide](visual-guides.md#git-branch-and-pull-request-workflow) | [git.md](git.md) |
+| Spec-driven development lifecycle | [Visual guide](visual-guides.md#spec-driven-development-lifecycle) | [spec-driven-development.md](spec-driven-development.md) |
 | Operational troubleshooting sequence | [Visual guide](visual-guides.md#operational-troubleshooting-sequence) | [STYLE_GUIDE.md](STYLE_GUIDE.md) |
 
 ## Networking fundamentals
@@ -94,11 +95,17 @@ The diagrams are intentionally limited to concepts where visual relationships im
 | sed | [sed.md](sed.md) |
 | Xen | [xen.md](xen.md) |
 
-## Development and data
+## Development workflows
 
 | Topic | Reference |
 |---|---|
 | Git | [git.md](git.md) |
+| Spec-driven development | [spec-driven-development.md](spec-driven-development.md) |
+
+## APIs and data
+
+| Topic | Reference |
+|---|---|
 | Kafka | [kafka.md](kafka.md) |
 | REST APIs | [rest-api.md](rest-api.md) |
 | SQL | [sql.md](sql.md) |
