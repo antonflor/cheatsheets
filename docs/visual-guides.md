@@ -97,6 +97,76 @@ flowchart LR
 
 A preview is not a substitute for validating the selected stack, cloud identity, region, policy controls, and rollback plan.
 
+## Talos and Omni management boundary
+
+Related references: [kubernetes-platforms/talos-linux.md](kubernetes-platforms/talos-linux.md) and [kubernetes-platforms/omni.md](kubernetes-platforms/omni.md)
+
+Standalone Talos is managed directly through the Talos API. When a machine joins Omni, Omni becomes the management authority and brokers normal Talos and Kubernetes access through its identity and policy model.
+
+```mermaid
+flowchart LR
+    Engineer["Engineer or automation"]
+    TalosConfig["talosconfig"]
+    TalosAPI["Talos API"]
+    Standalone["Standalone Talos Linux nodes"]
+
+    Identity["Identity provider or<br/>Omni service account"]
+    OmniConfig["omniconfig"]
+    Omni["Omni API and UI"]
+    SideroLink["SideroLink<br/>encrypted connectivity"]
+    Managed["Omni-managed Talos nodes"]
+    Kubernetes["Kubernetes API"]
+
+    Engineer --> TalosConfig
+    TalosConfig --> TalosAPI
+    TalosAPI --> Standalone
+
+    Engineer --> OmniConfig
+    Identity --> Omni
+    OmniConfig --> Omni
+    Omni --> SideroLink
+    SideroLink --> Managed
+    Omni --> Kubernetes
+    Managed --> Kubernetes
+```
+
+The two paths are intentionally different. Direct standalone procedures should not be assumed to work unchanged on an Omni-managed machine.
+
+## Omni machine-to-cluster lifecycle
+
+Related reference: [kubernetes-platforms/omni.md](kubernetes-platforms/omni.md)
+
+Omni can register manually provisioned machines or obtain machines through infrastructure providers, then allocate them to a cluster and manage their Talos and Kubernetes lifecycle.
+
+```mermaid
+flowchart LR
+    Media["Omni installation media<br/>or Machine Join Config"]
+    Provider["Infrastructure provider<br/>bare metal, Proxmox, vSphere,<br/>libvirt, or KubeVirt"]
+    Boot["Boot or create machine"]
+    Register["Register through SideroLink"]
+    Inventory["Machine inventory<br/>labels and status"]
+    Class["Machine class or<br/>explicit allocation"]
+    Cluster["Cluster template<br/>control plane and workers"]
+    Configure["Omni applies Talos configuration"]
+    Bootstrap["Bootstrap Kubernetes"]
+    Operate["Scale, upgrade,<br/>back up, and monitor"]
+    Recover["Restore or reprovision"]
+
+    Media --> Boot
+    Provider --> Boot
+    Boot --> Register
+    Register --> Inventory
+    Inventory --> Class
+    Class --> Cluster
+    Cluster --> Configure
+    Configure --> Bootstrap
+    Bootstrap --> Operate
+    Operate --> Recover
+    Recover --> Inventory
+```
+
+Out-of-band deletion of provider-managed or control-plane machines can leave Omni waiting for resources that no longer exist and can break etcd quorum.
+
 ## Linux boot sequence
 
 Related reference: [linux/linux-boot.md](linux/linux-boot.md)
