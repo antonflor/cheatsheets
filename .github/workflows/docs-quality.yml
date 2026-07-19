@@ -17,7 +17,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Validate maintained Markdown structure
+      - name: Validate Markdown structure
         shell: bash
         run: |
           python - <<'PY'
@@ -25,27 +25,26 @@ jobs:
           import re
           import sys
 
-          files = [
-              "README.md",
-              "CONTRIBUTING.md",
-              "STYLE_GUIDE.md",
-              "visual-guides.md",
-              "arista.md",
-              "aws.md",
-              "azure.md",
-              "cisco.md",
-              "docker.md",
-              "git.md",
-              "google-cloud.md",
-              "iptables.md",
-              "kubernetes.md",
-              "leaf-spine.md",
-              "linux-boot.md",
-              "pulumi.md",
-              "rest-api.md",
-              "spanning-tree.md",
-              "terraform.md",
-          ]
+          required_root = {
+              Path("README.md"),
+              Path("CONTRIBUTING.md"),
+              Path("STYLE_GUIDE.md"),
+          }
+          allowed_root_markdown = {path.name for path in required_root}
+          allowed_domains = {
+              "networking",
+              "network-platforms",
+              "cisco-contact-center",
+              "cloud",
+              "containers",
+              "automation",
+              "linux",
+              "high-availability",
+              "development",
+          }
+
+          docs = sorted(Path("docs").rglob("*.md"))
+          files = sorted(required_root) + docs
 
           supported_mermaid = re.compile(
               r"^(flowchart|graph|sequenceDiagram|stateDiagram-v2|"
@@ -53,15 +52,41 @@ jobs:
           )
 
           errors = []
-          for filename in files:
-              path = Path(filename)
+
+          unexpected_root = {
+              path.name
+              for path in Path(".").glob("*.md")
+              if path.name not in allowed_root_markdown
+          }
+          if unexpected_root:
+              errors.append(
+                  "Unexpected root Markdown files: "
+                  + ", ".join(sorted(unexpected_root))
+              )
+
+          if not docs:
+              errors.append("docs/: no Markdown reference files found")
+
+          for path in docs:
+              relative = path.relative_to("docs")
+              if len(relative.parts) == 1:
+                  if relative.name != "visual-guides.md":
+                      errors.append(
+                          f"{path}: only visual-guides.md may live directly under docs/"
+                      )
+              elif len(relative.parts) != 2:
+                  errors.append(f"{path}: references must use docs/<domain>/<file>.md")
+              elif relative.parts[0] not in allowed_domains:
+                  errors.append(f"{path}: unknown documentation domain")
+
+          for path in files:
               if not path.is_file():
-                  errors.append(f"{filename}: file is missing")
+                  errors.append(f"{path}: file is missing")
                   continue
 
               text = path.read_text(encoding="utf-8")
               if not text.strip():
-                  errors.append(f"{filename}: file is empty")
+                  errors.append(f"{path}: file is empty")
                   continue
 
               first_content_line = next(
@@ -69,13 +94,13 @@ jobs:
                   "",
               )
               if not first_content_line.startswith("# "):
-                  errors.append(f"{filename}: first content line must be an H1")
+                  errors.append(f"{path}: first content line must be an H1")
               if "\x00" in text:
-                  errors.append(f"{filename}: NUL byte found")
+                  errors.append(f"{path}: NUL byte found")
 
               for number, line in enumerate(text.splitlines(), start=1):
                   if re.search(r"\[[^\]]*\]\(\s*\)", line):
-                      errors.append(f"{filename}:{number}: empty Markdown link")
+                      errors.append(f"{path}:{number}: empty Markdown link")
 
               opening_count = text.count("```mermaid")
               mermaid_blocks = re.findall(
@@ -84,7 +109,7 @@ jobs:
                   flags=re.DOTALL,
               )
               if opening_count != len(mermaid_blocks):
-                  errors.append(f"{filename}: unclosed Mermaid code fence")
+                  errors.append(f"{path}: unclosed Mermaid code fence")
 
               for index, block in enumerate(mermaid_blocks, start=1):
                   first_line = next(
@@ -93,7 +118,7 @@ jobs:
                   )
                   if not supported_mermaid.match(first_line):
                       errors.append(
-                          f"{filename}: Mermaid block {index} has an unsupported "
+                          f"{path}: Mermaid block {index} has an unsupported "
                           f"or missing diagram declaration: {first_line!r}"
                       )
 
@@ -101,7 +126,7 @@ jobs:
               print("\n".join(errors))
               sys.exit(1)
 
-          print(f"Validated {len(files)} maintained Markdown files.")
+          print(f"Validated {len(files)} Markdown files across {len(docs)} references.")
           PY
 
   links:
@@ -110,30 +135,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check maintained documentation links
+      - name: Check documentation links
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
             --offline
             --verbose
             --no-progress
-            README.md
-            CONTRIBUTING.md
-            STYLE_GUIDE.md
-            visual-guides.md
-            arista.md
-            aws.md
-            azure.md
-            cisco.md
-            docker.md
-            git.md
-            google-cloud.md
-            iptables.md
-            kubernetes.md
-            leaf-spine.md
-            linux-boot.md
-            pulumi.md
-            rest-api.md
-            spanning-tree.md
-            terraform.md
+            './**/*.md'
           fail: true
